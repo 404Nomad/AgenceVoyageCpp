@@ -8,7 +8,16 @@ Développer une application en C++ pour une agence de voyage spécialisée dans 
 
 ---
 
+## Pré-requis
+
+1. Installer les bibliothèques nécessaires (**libs**) :
+   - (Liste des bibliothèques à ajouter ici)
+
+
 ## Lancer l'application
+
+
+## Structure du projet
 
 
 ## Conception
@@ -34,9 +43,12 @@ ex: ...
 
 ## Développement
 
+On choisit d'utiliser un orchestrateur pour notre base de donnée comme Docker.
+On utilise une bibliothèque comme MySQL Connector/C++ pour interagir avec la base de données.
+
 ### Base de donnée
    On crée notre .env
-   On crée notre docker-compose.yml
+   On crée notre orchestrateur docker-compose.yml 
       $ docker compose up --build -d
       On se connecte avec un outil externe :
          mysql -h 127.0.0.1 -P 3310 -u cppuser -p
@@ -49,17 +61,19 @@ ex: ...
       Puis ./mysqlbase
       On a un résultat : ![screenshot](Documents/BaseDeDonnée/bddimport.png)
 
-      
+### CMake et wxWidgets
 
-### Pré-requis
+   On installe CMake et wxWidgets
+   On ajoute un CMakeLists.txt
+   On crée un dossier build
+   On ajoute le json.hpp de la librairie nlohmann/json: JSON for Modern C++ a notre main.cpp
 
-1. Installer les bibliothèques nécessaires (**libs**) :
-   - (Liste des bibliothèques à ajouter ici)
+   On ouvre un terminal et on execute :
+   - cmake ..
+   - make
+   - ./wxApp
+   - Notre simple fenetre s'ouvre.
 
-### Structure du projet
 
-1. Créer le dossier principal : `AgenceVoyageIHM`.
-2. Créer le premier fichier : `main.cpp`.
-3. Créer le dossier pour stocker les documents : `Documents`
 
 ---
