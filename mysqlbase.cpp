@@ -57,21 +57,21 @@ int main() {
 
         // Insertion de données dans Clients
         stmt->execute(
-            "INSERT INTO Clients(nom, prenom, email, telephone, date_inscription) VALUES "
+            "INSERT IGNORE INTO Clients(nom, prenom, email, telephone, date_inscription) VALUES "
             "('Dupont', 'Jean', 'jean.dupont@example.com', '0123456789', '2023-01-01'),"
             "('Durand', 'Marie', 'marie.durand@example.com', '0987654321', '2023-02-01');"
         );
 
         // Insertion de données dans Treks
         stmt->execute(
-            "INSERT INTO Treks(nom, lieu, duree, prix, niveau_difficulte, description) VALUES "
+            "INSERT IGNORE INTO Treks(nom, lieu, duree, prix, niveau_difficulte, description) VALUES "
             "('Mont Blanc', 'Alpes', 5, 500.00, 'Difficile', 'Une randonnée exigeante mais gratifiante.'),"
             "('Sentier des douaniers', 'Bretagne', 3, 300.00, 'Facile', 'Un trek le long des côtes bretonnes.');"
         );
 
         // Insertion de données dans Reservations
         stmt->execute(
-            "INSERT INTO Reservations(client_id, trek_id, date_reservation, statut) VALUES "
+            "INSERT IGNORE INTO Reservations(client_id, trek_id, date_reservation, statut) VALUES "
             "(1, 1, '2023-03-01', 'Confirmée'),"
             "(2, 2, '2023-03-05', 'En attente');"
         );
@@ -86,6 +86,36 @@ int main() {
                       << "Email : " << res->getString("email") << " | "
                       << "Téléphone : " << res->getString("telephone") << " | "
                       << "Date d'inscription : " << res->getString("date_inscription") << std::endl;
+        }
+
+        // Affichage des données de la table Treks
+        std::cout << "\nTable Treks:" << std::endl;
+        res.reset(stmt->executeQuery("SELECT * FROM Treks;"));
+        while (res->next()) {
+            std::cout << "ID : " << res->getInt("id") << " | "
+                      << "Nom : " << res->getString("nom") << " | "
+                      << "Lieu : " << res->getString("lieu") << " | "
+                      << "Durée : " << res->getInt("duree") << " jours | "
+                      << "Prix : " << res->getDouble("prix") << "€ | "
+                      << "Niveau : " << res->getString("niveau_difficulte") << " | "
+                      << "Description : " << res->getString("description") << std::endl;
+        }
+
+        // Affichage des données de la table Reservations
+        std::cout << "\nTable Reservations:" << std::endl;
+        // une jointure SQL est utilisée pour inclure les noms des clients et des treks associés.
+        res.reset(stmt->executeQuery(
+            "SELECT r.id, c.nom AS client_nom, t.nom AS trek_nom, r.date_reservation, r.statut "
+            "FROM Reservations r "
+            "JOIN Clients c ON r.client_id = c.id "
+            "JOIN Treks t ON r.trek_id = t.id;"
+        ));
+        while (res->next()) {
+            std::cout << "ID : " << res->getInt("id") << " | "
+                      << "Client : " << res->getString("client_nom") << " | "
+                      << "Trek : " << res->getString("trek_nom") << " | "
+                      << "Date : " << res->getString("date_reservation") << " | "
+                      << "Statut : " << res->getString("statut") << std::endl;
         }
 
     } catch (sql::SQLException& e) {
