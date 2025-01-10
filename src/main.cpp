@@ -97,9 +97,9 @@ void MaFrame::InitClientsTab() {
     clientGrid->CreateGrid(0, 5);
     clientGrid->SetColLabelValue(0, "ID");
     clientGrid->SetColLabelValue(1, "Nom");
-    clientGrid->SetColLabelValue(2, "Prénom");
+    clientGrid->SetColLabelValue(2, "Prenom");
     clientGrid->SetColLabelValue(3, "Email");
-    clientGrid->SetColLabelValue(4, "Téléphone");
+    clientGrid->SetColLabelValue(4, "Telephone");
 
     // Lier les événements
     addButton->Bind(wxEVT_BUTTON, [=](wxCommandEvent&) {
@@ -139,7 +139,7 @@ void MaFrame::InitTreksTab() {
     trekGrid->SetColLabelValue(0, "ID");
     trekGrid->SetColLabelValue(1, "Nom");
     trekGrid->SetColLabelValue(2, "Lieu");
-    trekGrid->SetColLabelValue(3, "Durée");
+    trekGrid->SetColLabelValue(3, "Duree");
     trekGrid->SetColLabelValue(4, "Prix");
 
     m_notebook->AddPage(panel, "Treks", false);

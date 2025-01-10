@@ -45,6 +45,7 @@ ex: ...
 
 On choisit d'utiliser un orchestrateur pour notre base de donnée comme Docker.
 On utilise une bibliothèque comme MySQL Connector/C++ pour interagir avec la base de données.
+On utilise wxWidgets pour L'interface Utilisateur
 
 ### Base de donnée
    On crée notre .env
@@ -60,6 +61,7 @@ On utilise une bibliothèque comme MySQL Connector/C++ pour interagir avec la ba
       On execute la commande suivnte :  g++ mysqlbase.cpp -o mysqlbase -lmysqlcppconn
       Puis ./mysqlbase
       On a un résultat : ![screenshot](Documents/BaseDeDonnée/bddimport.png)
+   On refactor notre fichier mysqlbase.cpp en db_setup.cpp et db_setup.h avec une Fonction void DatabaseInitializer::initializeDatabase() 
 
 ### CMake et wxWidgets
 
@@ -74,8 +76,19 @@ On utilise une bibliothèque comme MySQL Connector/C++ pour interagir avec la ba
    - ./wxApp
    - Notre simple fenetre s'ouvre.
   
-  On se rend compte que notre script pour la creation de la base de donnée utilise unt int main() ce qui leve une erreur lors de la compilation avec CMake
+  On se rend compte que notre script pour la creation de la base de donnée utilise un int main() ce qui leve une erreur lors de la compilation avec CMake.
+  On corrige cette erreur, on compile et ça fonctionne, on peut maintenant lister les clients depuis notre application
 
 
 
 ---
+Database Initialization:
+
+    Tables are created or updated automatically when the application is run.
+    This ensures a seamless setup process for your application.
+
+Application Functionality:
+
+    The main window opens correctly.
+    The "List Clients" feature works, pulling data from the database and displaying it.
+    The "Add Clients" button is functional with placeholder behavior.
