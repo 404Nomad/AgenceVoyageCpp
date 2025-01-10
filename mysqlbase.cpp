@@ -20,7 +20,12 @@ int main() {
         // Création des tables
         std::unique_ptr<sql::Statement> stmt(con->createStatement());
 
-        // Table Clients
+        // Suppression des tables
+        // stmt->execute("DROP TABLE IF EXISTS Reservations;");
+        // stmt->execute("DROP TABLE IF EXISTS Treks;");
+        // stmt->execute("DROP TABLE IF EXISTS Clients;");
+
+        //Table Clients
         stmt->execute(
             "CREATE TABLE IF NOT EXISTS Clients ("
             "id INT AUTO_INCREMENT PRIMARY KEY, "
@@ -50,7 +55,7 @@ int main() {
             "client_id INT NOT NULL, "
             "trek_id INT NOT NULL, "
             "date_reservation DATE NOT NULL, "
-            "statut ENUM('Confirmée', 'Annulée', 'En attente') NOT NULL, "
+            "statut ENUM('Confirmée', 'Annulée') NOT NULL, "
             "FOREIGN KEY (client_id) REFERENCES Clients(id) ON DELETE CASCADE ON UPDATE CASCADE, "
             "FOREIGN KEY (trek_id) REFERENCES Treks(id) ON DELETE CASCADE ON UPDATE CASCADE);"
         );
@@ -73,7 +78,7 @@ int main() {
         stmt->execute(
             "INSERT IGNORE INTO Reservations(client_id, trek_id, date_reservation, statut) VALUES "
             "(1, 1, '2023-03-01', 'Confirmée'),"
-            "(2, 2, '2023-03-05', 'En attente');"
+            "(2, 2, '2023-03-05', 'Annulée');"
         );
 
         // Affichage des données de la table Clients

@@ -45,6 +45,11 @@ ex: ...
       Maintenant nos identifiants sont dans le cache du container docker on peut se connecter via un terminal bash ou executer notre fichier  mysqlbase.cpp qui va automatiquement se connecter et charger/créer les tables.
    On crée notre fichier qui servira a load la base mysqlbase.cpp
       Dans ce fichier nous créons la connexion a la base de donnée, créons les tables si elles n'existent pas et insérons des données fictives "fixtures". on finit par montrer le resultat de l'insertion dans le terminal.
+      On execute la commande suivnte :  g++ mysqlbase.cpp -o mysqlbase -lmysqlcppconn
+      Puis ./mysqlbase
+      On a un résultat : ![screenshot](Documents/BaseDeDonnée/bddimport.png)
+
+      
 
 ### Pré-requis
 
