@@ -1,0 +1,109 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:134.0) Gecko/20100101 Firefox/134.0" version="26.0.4">
+  <diagram name="Page-1" id="0yTv6w_a6f07Q5dsQlCz">
+    <mxGraphModel dx="1231" dy="2356" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-38" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;endArrow=none;endFill=0;" edge="1" parent="1" source="LX_CIVAh1eMHVkf84p1u-1" target="LX_CIVAh1eMHVkf84p1u-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-39" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;endArrow=none;endFill=0;" edge="1" parent="1" source="LX_CIVAh1eMHVkf84p1u-1" target="LX_CIVAh1eMHVkf84p1u-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-40" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;endArrow=none;endFill=0;" edge="1" parent="1" source="LX_CIVAh1eMHVkf84p1u-1" target="LX_CIVAh1eMHVkf84p1u-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-41" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;endArrow=none;endFill=0;" edge="1" parent="1" source="LX_CIVAh1eMHVkf84p1u-1" target="LX_CIVAh1eMHVkf84p1u-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-42" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;endArrow=none;endFill=0;" edge="1" parent="1" source="LX_CIVAh1eMHVkf84p1u-1" target="LX_CIVAh1eMHVkf84p1u-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-43" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;endArrow=none;endFill=0;" edge="1" parent="1" source="LX_CIVAh1eMHVkf84p1u-1" target="LX_CIVAh1eMHVkf84p1u-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-44" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;endArrow=none;endFill=0;" edge="1" parent="1" source="LX_CIVAh1eMHVkf84p1u-1" target="LX_CIVAh1eMHVkf84p1u-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-45" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;endArrow=none;endFill=0;" edge="1" parent="1" source="LX_CIVAh1eMHVkf84p1u-1" target="LX_CIVAh1eMHVkf84p1u-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-46" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;endArrow=none;endFill=0;" edge="1" parent="1" source="LX_CIVAh1eMHVkf84p1u-1" target="LX_CIVAh1eMHVkf84p1u-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-47" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;endArrow=none;endFill=0;" edge="1" parent="1" source="LX_CIVAh1eMHVkf84p1u-1" target="LX_CIVAh1eMHVkf84p1u-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-48" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;endArrow=none;endFill=0;" edge="1" parent="1" source="LX_CIVAh1eMHVkf84p1u-1" target="LX_CIVAh1eMHVkf84p1u-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-49" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;endArrow=none;endFill=0;" edge="1" parent="1" source="LX_CIVAh1eMHVkf84p1u-1" target="LX_CIVAh1eMHVkf84p1u-29">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-50" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;endArrow=none;endFill=0;" edge="1" parent="1" source="LX_CIVAh1eMHVkf84p1u-1" target="LX_CIVAh1eMHVkf84p1u-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-1" value="&lt;br&gt;Agent" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="183" y="-618" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-5" value="" style="swimlane;startSize=0;" vertex="1" parent="1">
+          <mxGeometry x="384" y="-1086" width="249" height="302" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-6" value="Gestion des Clients" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" vertex="1" parent="LX_CIVAh1eMHVkf84p1u-5">
+          <mxGeometry x="35" y="7" width="179" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-8" value="Ajouter un client" style="ellipse;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="LX_CIVAh1eMHVkf84p1u-5">
+          <mxGeometry x="57.75" y="52" width="133.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-9" value="Supprimer un client" style="ellipse;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="LX_CIVAh1eMHVkf84p1u-5">
+          <mxGeometry x="57.75" y="113" width="133.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-10" value="Modifier un client" style="ellipse;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="LX_CIVAh1eMHVkf84p1u-5">
+          <mxGeometry x="57.75" y="174" width="133.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-11" value="Lister les clients" style="ellipse;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="LX_CIVAh1eMHVkf84p1u-5">
+          <mxGeometry x="57.75" y="235" width="133.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-18" value="" style="swimlane;startSize=0;" vertex="1" parent="1">
+          <mxGeometry x="384" y="-752" width="249" height="328" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-19" value="Gestion des Treks" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" vertex="1" parent="LX_CIVAh1eMHVkf84p1u-18">
+          <mxGeometry x="35" y="7" width="179" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-20" value="Ajouter un trek" style="ellipse;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="LX_CIVAh1eMHVkf84p1u-18">
+          <mxGeometry x="57.75" y="52" width="133.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-21" value="Supprimer un trek" style="ellipse;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="LX_CIVAh1eMHVkf84p1u-18">
+          <mxGeometry x="57.75" y="107" width="133.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-22" value="Modifier un trek" style="ellipse;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="LX_CIVAh1eMHVkf84p1u-18">
+          <mxGeometry x="57.75" y="162" width="133.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-23" value="Lister les treks" style="ellipse;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="LX_CIVAh1eMHVkf84p1u-18">
+          <mxGeometry x="57.75" y="217" width="133.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-24" value="Afficher détails treks" style="ellipse;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="LX_CIVAh1eMHVkf84p1u-18">
+          <mxGeometry x="57.75" y="272" width="133.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-25" value="" style="swimlane;startSize=0;" vertex="1" parent="1">
+          <mxGeometry x="384" y="-381" width="249" height="275" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-26" value="Gestion des Réservations" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" vertex="1" parent="LX_CIVAh1eMHVkf84p1u-25">
+          <mxGeometry x="35" y="7" width="188" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-27" value="Ajouter une réservation" style="ellipse;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="LX_CIVAh1eMHVkf84p1u-25">
+          <mxGeometry x="57.75" y="52" width="133.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-28" value="Annuler une réservation" style="ellipse;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="LX_CIVAh1eMHVkf84p1u-25">
+          <mxGeometry x="57.75" y="107" width="133.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-29" value="Modifier une résevation" style="ellipse;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="LX_CIVAh1eMHVkf84p1u-25">
+          <mxGeometry x="57.75" y="162" width="133.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LX_CIVAh1eMHVkf84p1u-30" value="Lister les réservations" style="ellipse;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="LX_CIVAh1eMHVkf84p1u-25">
+          <mxGeometry x="57.75" y="217" width="133.5" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
