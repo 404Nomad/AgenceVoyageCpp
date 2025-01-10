@@ -6,16 +6,28 @@ Développer une application en C++ pour une agence de voyage spécialisée dans 
 
 ---
 
+## Lancer l'application
+
+
 ## Conception
 
+### Analyse des besoins :
 Nous utilisons **Draw.io** pour créer les diagrammes suivants :
+
+TODO: corriger les diagrammes
+ex: use case ajouter api meteo
+ex: verifier cardinalités et include exclude
+ex: ...
 
 - **Diagramme des cas d'utilisation** : Représente les interactions principales.
 ![screenshot](Documents/DiagrammeCasUtilisations/DUse.png)
 - **Diagramme de classe** : Modélise les relations entre les entités.
 ![screenshot](Documents/DiagrammeDeClasse/DClasse.png)
 
-
+### Conception de la base de donnée :
+    Clients : (id, nom, prénom, email, numéro de téléphone, date d'inscription).
+    Treks : (id, nom, lieu, durée (jours), prix, niveau de difficulté, description).
+    Réservations : (id, client_id, trek_id, date de réservation, statut).
 ---
 
 ## Développement
