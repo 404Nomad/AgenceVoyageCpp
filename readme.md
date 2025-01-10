@@ -1,3 +1,5 @@
+TODO: changer les "je", "on" , "nous" par un verbe conjugée:
+   ex : Nous créons le .env > Création du .env.
 # Documentation
 
 ## Énoncé
@@ -31,6 +33,18 @@ ex: ...
 ---
 
 ## Développement
+
+### Base de donnée
+   On crée notre .env
+   On crée notre docker-compose.yml
+      $ docker compose up --build -d
+      On se connecte avec un outil externe :
+         mysql -h 127.0.0.1 -P 3310 -u cppuser -p
+            show databases;
+            use agencesqslctn
+      Maintenant nos identifiants sont dans le cache du container docker on peut se connecter via un terminal bash ou executer notre fichier  mysqlbase.cpp qui va automatiquement se connecter et charger/créer les tables.
+   On crée notre fichier qui servira a load la base mysqlbase.cpp
+      Dans ce fichier nous créons la connexion a la base de donnée, créons les tables si elles n'existent pas et insérons des données fictives "fixtures". on finit par montrer le resultat de l'insertion dans le terminal.
 
 ### Pré-requis
 
