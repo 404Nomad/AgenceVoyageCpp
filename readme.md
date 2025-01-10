@@ -73,6 +73,8 @@ On utilise une bibliothèque comme MySQL Connector/C++ pour interagir avec la ba
    - make
    - ./wxApp
    - Notre simple fenetre s'ouvre.
+  
+  On se rend compte que notre script pour la creation de la base de donnée utilise unt int main() ce qui leve une erreur lors de la compilation avec CMake
 
 
 

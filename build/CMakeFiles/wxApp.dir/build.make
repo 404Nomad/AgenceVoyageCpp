@@ -69,31 +69,64 @@ include CMakeFiles/wxApp.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/wxApp.dir/flags.make
 
-CMakeFiles/wxApp.dir/main.cpp.o: CMakeFiles/wxApp.dir/flags.make
-CMakeFiles/wxApp.dir/main.cpp.o: ../main.cpp
-CMakeFiles/wxApp.dir/main.cpp.o: CMakeFiles/wxApp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cd2groupea/Documents/AgenceVoyageIHM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/wxApp.dir/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/wxApp.dir/main.cpp.o -MF CMakeFiles/wxApp.dir/main.cpp.o.d -o CMakeFiles/wxApp.dir/main.cpp.o -c /home/cd2groupea/Documents/AgenceVoyageIHM/main.cpp
+CMakeFiles/wxApp.dir/src/main.cpp.o: CMakeFiles/wxApp.dir/flags.make
+CMakeFiles/wxApp.dir/src/main.cpp.o: ../src/main.cpp
+CMakeFiles/wxApp.dir/src/main.cpp.o: CMakeFiles/wxApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cd2groupea/Documents/AgenceVoyageIHM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/wxApp.dir/src/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/wxApp.dir/src/main.cpp.o -MF CMakeFiles/wxApp.dir/src/main.cpp.o.d -o CMakeFiles/wxApp.dir/src/main.cpp.o -c /home/cd2groupea/Documents/AgenceVoyageIHM/src/main.cpp
 
-CMakeFiles/wxApp.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wxApp.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cd2groupea/Documents/AgenceVoyageIHM/main.cpp > CMakeFiles/wxApp.dir/main.cpp.i
+CMakeFiles/wxApp.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wxApp.dir/src/main.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cd2groupea/Documents/AgenceVoyageIHM/src/main.cpp > CMakeFiles/wxApp.dir/src/main.cpp.i
 
-CMakeFiles/wxApp.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wxApp.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cd2groupea/Documents/AgenceVoyageIHM/main.cpp -o CMakeFiles/wxApp.dir/main.cpp.s
+CMakeFiles/wxApp.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wxApp.dir/src/main.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cd2groupea/Documents/AgenceVoyageIHM/src/main.cpp -o CMakeFiles/wxApp.dir/src/main.cpp.s
+
+CMakeFiles/wxApp.dir/src/Client.cpp.o: CMakeFiles/wxApp.dir/flags.make
+CMakeFiles/wxApp.dir/src/Client.cpp.o: ../src/Client.cpp
+CMakeFiles/wxApp.dir/src/Client.cpp.o: CMakeFiles/wxApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cd2groupea/Documents/AgenceVoyageIHM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/wxApp.dir/src/Client.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/wxApp.dir/src/Client.cpp.o -MF CMakeFiles/wxApp.dir/src/Client.cpp.o.d -o CMakeFiles/wxApp.dir/src/Client.cpp.o -c /home/cd2groupea/Documents/AgenceVoyageIHM/src/Client.cpp
+
+CMakeFiles/wxApp.dir/src/Client.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wxApp.dir/src/Client.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cd2groupea/Documents/AgenceVoyageIHM/src/Client.cpp > CMakeFiles/wxApp.dir/src/Client.cpp.i
+
+CMakeFiles/wxApp.dir/src/Client.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wxApp.dir/src/Client.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cd2groupea/Documents/AgenceVoyageIHM/src/Client.cpp -o CMakeFiles/wxApp.dir/src/Client.cpp.s
+
+CMakeFiles/wxApp.dir/src/db_setup.cpp.o: CMakeFiles/wxApp.dir/flags.make
+CMakeFiles/wxApp.dir/src/db_setup.cpp.o: ../src/db_setup.cpp
+CMakeFiles/wxApp.dir/src/db_setup.cpp.o: CMakeFiles/wxApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cd2groupea/Documents/AgenceVoyageIHM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/wxApp.dir/src/db_setup.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/wxApp.dir/src/db_setup.cpp.o -MF CMakeFiles/wxApp.dir/src/db_setup.cpp.o.d -o CMakeFiles/wxApp.dir/src/db_setup.cpp.o -c /home/cd2groupea/Documents/AgenceVoyageIHM/src/db_setup.cpp
+
+CMakeFiles/wxApp.dir/src/db_setup.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wxApp.dir/src/db_setup.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cd2groupea/Documents/AgenceVoyageIHM/src/db_setup.cpp > CMakeFiles/wxApp.dir/src/db_setup.cpp.i
+
+CMakeFiles/wxApp.dir/src/db_setup.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wxApp.dir/src/db_setup.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cd2groupea/Documents/AgenceVoyageIHM/src/db_setup.cpp -o CMakeFiles/wxApp.dir/src/db_setup.cpp.s
 
 # Object files for target wxApp
 wxApp_OBJECTS = \
-"CMakeFiles/wxApp.dir/main.cpp.o"
+"CMakeFiles/wxApp.dir/src/main.cpp.o" \
+"CMakeFiles/wxApp.dir/src/Client.cpp.o" \
+"CMakeFiles/wxApp.dir/src/db_setup.cpp.o"
 
 # External object files for target wxApp
 wxApp_EXTERNAL_OBJECTS =
 
-wxApp: CMakeFiles/wxApp.dir/main.cpp.o
+wxApp: CMakeFiles/wxApp.dir/src/main.cpp.o
+wxApp: CMakeFiles/wxApp.dir/src/Client.cpp.o
+wxApp: CMakeFiles/wxApp.dir/src/db_setup.cpp.o
 wxApp: CMakeFiles/wxApp.dir/build.make
+wxApp: /usr/lib/x86_64-linux-gnu/libmysqlcppconn.so
 wxApp: CMakeFiles/wxApp.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/cd2groupea/Documents/AgenceVoyageIHM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable wxApp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/cd2groupea/Documents/AgenceVoyageIHM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable wxApp"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/wxApp.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

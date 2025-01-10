@@ -129,29 +129,77 @@ wxApp/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/build
 .PHONY : wxApp/fast
 
-main.o: main.cpp.o
-.PHONY : main.o
+src/Client.o: src/Client.cpp.o
+.PHONY : src/Client.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/main.cpp.o
-.PHONY : main.cpp.o
+src/Client.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/Client.cpp.o
+.PHONY : src/Client.cpp.o
 
-main.i: main.cpp.i
-.PHONY : main.i
+src/Client.i: src/Client.cpp.i
+.PHONY : src/Client.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/main.cpp.i
-.PHONY : main.cpp.i
+src/Client.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/Client.cpp.i
+.PHONY : src/Client.cpp.i
 
-main.s: main.cpp.s
-.PHONY : main.s
+src/Client.s: src/Client.cpp.s
+.PHONY : src/Client.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/main.cpp.s
-.PHONY : main.cpp.s
+src/Client.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/Client.cpp.s
+.PHONY : src/Client.cpp.s
+
+src/db_setup.o: src/db_setup.cpp.o
+.PHONY : src/db_setup.o
+
+# target to build an object file
+src/db_setup.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/db_setup.cpp.o
+.PHONY : src/db_setup.cpp.o
+
+src/db_setup.i: src/db_setup.cpp.i
+.PHONY : src/db_setup.i
+
+# target to preprocess a source file
+src/db_setup.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/db_setup.cpp.i
+.PHONY : src/db_setup.cpp.i
+
+src/db_setup.s: src/db_setup.cpp.s
+.PHONY : src/db_setup.s
+
+# target to generate assembly for a file
+src/db_setup.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/db_setup.cpp.s
+.PHONY : src/db_setup.cpp.s
+
+src/main.o: src/main.cpp.o
+.PHONY : src/main.o
+
+# target to build an object file
+src/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
+
+src/main.i: src/main.cpp.i
+.PHONY : src/main.i
+
+# target to preprocess a source file
+src/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
+
+src/main.s: src/main.cpp.s
+.PHONY : src/main.s
+
+# target to generate assembly for a file
+src/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
 
 # Help Target
 help:
@@ -162,9 +210,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... wxApp"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... src/Client.o"
+	@echo "... src/Client.i"
+	@echo "... src/Client.s"
+	@echo "... src/db_setup.o"
+	@echo "... src/db_setup.i"
+	@echo "... src/db_setup.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
 .PHONY : help
 
 

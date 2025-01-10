@@ -1,31 +1,21 @@
+#include "db_setup.h"
 #include <mysql_driver.h>
 #include <mysql_connection.h>
 #include <cppconn/statement.h>
 #include <cppconn/resultset.h>
 #include <cppconn/exception.h>
 #include <iostream>
+#include <memory>
 
-// Commande pour compiler : g++ mysqlbase.cpp -o mysqlbase -lmysqlcppconn
-// Exécution : ./mysqlbase
-
-int main() {
+void DatabaseInitializer::initializeDatabase() {
     try {
-        // Création de la connexion
         sql::mysql::MySQL_Driver* driver = sql::mysql::get_mysql_driver_instance();
         std::unique_ptr<sql::Connection> con(driver->connect("tcp://127.0.0.1:3310", "cppuser", "mycpp"));
 
-        // Connexion à la base de données
         con->setSchema("agencesqlctn");
-
-        // Création des tables
         std::unique_ptr<sql::Statement> stmt(con->createStatement());
 
-        // Suppression des tables
-        // stmt->execute("DROP TABLE IF EXISTS Reservations;");
-        // stmt->execute("DROP TABLE IF EXISTS Treks;");
-        // stmt->execute("DROP TABLE IF EXISTS Clients;");
-
-        //Table Clients
+        // Create Clients table
         stmt->execute(
             "CREATE TABLE IF NOT EXISTS Clients ("
             "id INT AUTO_INCREMENT PRIMARY KEY, "
@@ -36,7 +26,7 @@ int main() {
             "date_inscription DATE NOT NULL);"
         );
 
-        // Table Treks
+        // Create Treks table
         stmt->execute(
             "CREATE TABLE IF NOT EXISTS Treks ("
             "id INT AUTO_INCREMENT PRIMARY KEY, "
@@ -48,7 +38,7 @@ int main() {
             "description TEXT NOT NULL);"
         );
 
-        // Table Reservations
+        // Create Reservations table
         stmt->execute(
             "CREATE TABLE IF NOT EXISTS Reservations ("
             "id INT AUTO_INCREMENT PRIMARY KEY, "
@@ -60,21 +50,21 @@ int main() {
             "FOREIGN KEY (trek_id) REFERENCES Treks(id) ON DELETE CASCADE ON UPDATE CASCADE);"
         );
 
-        // Insertion de données dans Clients
+        // Insert fixtures for Clients
         stmt->execute(
             "INSERT IGNORE INTO Clients(nom, prenom, email, telephone, date_inscription) VALUES "
             "('Dupont', 'Jean', 'jean.dupont@example.com', '0123456789', '2023-01-01'),"
             "('Durand', 'Marie', 'marie.durand@example.com', '0987654321', '2023-02-01');"
         );
 
-        // Insertion de données dans Treks
+        // Insert fixtures for Treks
         stmt->execute(
             "INSERT IGNORE INTO Treks(nom, lieu, duree, prix, niveau_difficulte, description) VALUES "
             "('Mont Blanc', 'Alpes', 5, 500.00, 'Difficile', 'Une randonnée exigeante mais gratifiante.'),"
             "('Sentier des douaniers', 'Bretagne', 3, 300.00, 'Facile', 'Un trek le long des côtes bretonnes.');"
         );
 
-        // Insertion de données dans Reservations
+        // Insert fixtures for Reservations
         stmt->execute(
             "INSERT IGNORE INTO Reservations(client_id, trek_id, date_reservation, statut) VALUES "
             "(1, 1, '2023-03-01', 'Confirmée'),"
@@ -123,10 +113,8 @@ int main() {
                       << "Statut : " << res->getString("statut") << std::endl;
         }
 
-    } catch (sql::SQLException& e) {
-        std::cerr << "Erreur SQL : " << e.what() << std::endl;
-        return 1;
+        std::cout << "Database initialized successfully with fixtures!" << std::endl;
+    } catch (const sql::SQLException& e) {
+        std::cerr << "SQL Error: " << e.what() << std::endl;
     }
-
-    return 0;
 }

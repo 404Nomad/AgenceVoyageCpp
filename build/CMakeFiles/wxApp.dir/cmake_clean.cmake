@@ -1,6 +1,10 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/wxApp.dir/main.cpp.o"
-  "CMakeFiles/wxApp.dir/main.cpp.o.d"
+  "CMakeFiles/wxApp.dir/src/Client.cpp.o"
+  "CMakeFiles/wxApp.dir/src/Client.cpp.o.d"
+  "CMakeFiles/wxApp.dir/src/db_setup.cpp.o"
+  "CMakeFiles/wxApp.dir/src/db_setup.cpp.o.d"
+  "CMakeFiles/wxApp.dir/src/main.cpp.o"
+  "CMakeFiles/wxApp.dir/src/main.cpp.o.d"
   "wxApp"
   "wxApp.pdb"
 )
