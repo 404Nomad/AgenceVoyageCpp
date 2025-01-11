@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/cd2groupea/Documents/AgenceVoyageIHM
+CMAKE_SOURCE_DIR = /home/major/Documents/AgenceVoyageCpp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/cd2groupea/Documents/AgenceVoyageIHM/build
+CMAKE_BINARY_DIR = /home/major/Documents/AgenceVoyageCpp/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cd2groupea/Documents/AgenceVoyageIHM/build/CMakeFiles /home/cd2groupea/Documents/AgenceVoyageIHM/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/major/Documents/AgenceVoyageCpp/build/CMakeFiles /home/major/Documents/AgenceVoyageCpp/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cd2groupea/Documents/AgenceVoyageIHM/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/major/Documents/AgenceVoyageCpp/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -153,6 +153,78 @@ src/Client.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/Client.cpp.s
 .PHONY : src/Client.cpp.s
 
+src/Client/ClientEditDialog.o: src/Client/ClientEditDialog.cpp.o
+.PHONY : src/Client/ClientEditDialog.o
+
+# target to build an object file
+src/Client/ClientEditDialog.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/Client/ClientEditDialog.cpp.o
+.PHONY : src/Client/ClientEditDialog.cpp.o
+
+src/Client/ClientEditDialog.i: src/Client/ClientEditDialog.cpp.i
+.PHONY : src/Client/ClientEditDialog.i
+
+# target to preprocess a source file
+src/Client/ClientEditDialog.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/Client/ClientEditDialog.cpp.i
+.PHONY : src/Client/ClientEditDialog.cpp.i
+
+src/Client/ClientEditDialog.s: src/Client/ClientEditDialog.cpp.s
+.PHONY : src/Client/ClientEditDialog.s
+
+# target to generate assembly for a file
+src/Client/ClientEditDialog.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/Client/ClientEditDialog.cpp.s
+.PHONY : src/Client/ClientEditDialog.cpp.s
+
+src/Reservation.o: src/Reservation.cpp.o
+.PHONY : src/Reservation.o
+
+# target to build an object file
+src/Reservation.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/Reservation.cpp.o
+.PHONY : src/Reservation.cpp.o
+
+src/Reservation.i: src/Reservation.cpp.i
+.PHONY : src/Reservation.i
+
+# target to preprocess a source file
+src/Reservation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/Reservation.cpp.i
+.PHONY : src/Reservation.cpp.i
+
+src/Reservation.s: src/Reservation.cpp.s
+.PHONY : src/Reservation.s
+
+# target to generate assembly for a file
+src/Reservation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/Reservation.cpp.s
+.PHONY : src/Reservation.cpp.s
+
+src/Trek.o: src/Trek.cpp.o
+.PHONY : src/Trek.o
+
+# target to build an object file
+src/Trek.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/Trek.cpp.o
+.PHONY : src/Trek.cpp.o
+
+src/Trek.i: src/Trek.cpp.i
+.PHONY : src/Trek.i
+
+# target to preprocess a source file
+src/Trek.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/Trek.cpp.i
+.PHONY : src/Trek.cpp.i
+
+src/Trek.s: src/Trek.cpp.s
+.PHONY : src/Trek.s
+
+# target to generate assembly for a file
+src/Trek.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/Trek.cpp.s
+.PHONY : src/Trek.cpp.s
+
 src/db_setup.o: src/db_setup.cpp.o
 .PHONY : src/db_setup.o
 
@@ -213,6 +285,15 @@ help:
 	@echo "... src/Client.o"
 	@echo "... src/Client.i"
 	@echo "... src/Client.s"
+	@echo "... src/Client/ClientEditDialog.o"
+	@echo "... src/Client/ClientEditDialog.i"
+	@echo "... src/Client/ClientEditDialog.s"
+	@echo "... src/Reservation.o"
+	@echo "... src/Reservation.i"
+	@echo "... src/Reservation.s"
+	@echo "... src/Trek.o"
+	@echo "... src/Trek.i"
+	@echo "... src/Trek.s"
 	@echo "... src/db_setup.o"
 	@echo "... src/db_setup.i"
 	@echo "... src/db_setup.s"

@@ -3,6 +3,7 @@
 #include <wx/menu.h>
 #include <wx/grid.h>
 #include <wx/notebook.h>
+#include "Client/ClientEditDialog.h"
 #include "Client.h" // Inclure la gestion des clients
 #include "Trek.h"   // Inclure la gestion des treks
 #include "Reservation.h" // Inclure la gestion des reservations
@@ -88,11 +89,11 @@ void MaFrame::OnAbout(wxCommandEvent& event) {
 void MaFrame::InitClientsTab() {
     wxPanel* panel = new wxPanel(m_notebook, wxID_ANY);
 
-    // Bouton pour ajouter un client
     wxButton* addButton = new wxButton(panel, wxID_ANY, "Ajouter Client", wxPoint(10, 10));
-    wxButton* listButton = new wxButton(panel, wxID_ANY, "Lister Clients", wxPoint(150, 10));
+    wxButton* editButton = new wxButton(panel, wxID_ANY, "Modifier Client", wxPoint(150, 10));
+    wxButton* deleteButton = new wxButton(panel, wxID_ANY, "Supprimer Client", wxPoint(290, 10));
+    wxButton* listButton = new wxButton(panel, wxID_ANY, "Lister Clients", wxPoint(430, 10));
 
-    // Grille pour afficher les clients
     wxGrid* clientGrid = new wxGrid(panel, wxID_ANY, wxPoint(10, 50), wxSize(760, 400));
     clientGrid->CreateGrid(0, 5);
     clientGrid->SetColLabelValue(0, "ID");
@@ -102,12 +103,70 @@ void MaFrame::InitClientsTab() {
     clientGrid->SetColLabelValue(4, "Telephone");
 
     // Lier les événements
-    addButton->Bind(wxEVT_BUTTON, [=](wxCommandEvent&) {
-        wxMessageBox("Fonction Ajouter Client appelée", "Info", wxOK | wxICON_INFORMATION);
+    addButton->Bind(wxEVT_BUTTON, [this](wxCommandEvent&) {
+        // Ajouter un client via une boîte de dialogue
+        wxTextEntryDialog dlg(this, "Nom du Client :", "Ajouter Client");
+        if (dlg.ShowModal() == wxID_OK) {
+            Client newClient;
+            newClient.nom = dlg.GetValue().ToStdString();
+            newClient.prenom = "PrénomTest"; // Vous pouvez étendre avec un formulaire complet
+            newClient.email = "email@example.com";
+            newClient.telephone = "0123456789";
+            newClient.date_inscription = "2023-01-01"; // Date actuelle à calculer dynamiquement
+            ClientManager::addClient(newClient);
+            wxMessageBox("Client ajouté avec succès !", "Succès", wxOK | wxICON_INFORMATION);
+        }
+    });
+
+    editButton->Bind(wxEVT_BUTTON, [this, clientGrid](wxCommandEvent&) {
+        int selectedRow = clientGrid->GetGridCursorRow();
+        if (selectedRow != wxNOT_FOUND) {
+            // Récupérer les données du client sélectionné
+            Client clientToEdit;
+            clientToEdit.id = std::stoi(clientGrid->GetCellValue(selectedRow, 0).ToStdString());
+            clientToEdit.nom = clientGrid->GetCellValue(selectedRow, 1).ToStdString();
+            clientToEdit.prenom = clientGrid->GetCellValue(selectedRow, 2).ToStdString();
+            clientToEdit.email = clientGrid->GetCellValue(selectedRow, 3).ToStdString();
+            clientToEdit.telephone = clientGrid->GetCellValue(selectedRow, 4).ToStdString();
+
+            // Ouvrir le formulaire de modification
+            ClientEditDialog dialog(this, clientToEdit);
+            if (dialog.ShowModal() == wxID_OK) {
+                // Mettre à jour les données avec les nouvelles valeurs
+                clientToEdit.nom = dialog.GetNom();
+                clientToEdit.prenom = dialog.GetPrenom();
+                clientToEdit.email = dialog.GetEmail();
+                clientToEdit.telephone = dialog.GetTelephone();
+
+                // Mettre à jour dans la base de données
+                ClientManager::updateClient(clientToEdit);
+
+                // Mettre à jour la grille
+                clientGrid->SetCellValue(selectedRow, 1, clientToEdit.nom);
+                clientGrid->SetCellValue(selectedRow, 2, clientToEdit.prenom);
+                clientGrid->SetCellValue(selectedRow, 3, clientToEdit.email);
+                clientGrid->SetCellValue(selectedRow, 4, clientToEdit.telephone);
+
+                wxMessageBox("Client modifie avec succes !", "Succès", wxOK | wxICON_INFORMATION);
+            }
+        } else {
+            wxMessageBox("Veuillez sélectionner un client à modifier.", "Erreur", wxOK | wxICON_WARNING);
+        }
+    });
+
+
+    deleteButton->Bind(wxEVT_BUTTON, [=](wxCommandEvent&) {
+        // Supprimer un client
+        int selectedRow = clientGrid->GetGridCursorRow();
+        if (selectedRow != wxNOT_FOUND) {
+            int clientId = std::stoi(clientGrid->GetCellValue(selectedRow, 0).ToStdString());
+            ClientManager::deleteClient(clientId);
+            wxMessageBox("Client supprimé avec succès !", "Succès", wxOK | wxICON_INFORMATION);
+        }
     });
 
     listButton->Bind(wxEVT_BUTTON, [=](wxCommandEvent&) {
-        // Exemple d'utilisation de `ClientManager` pour lister les clients
+        // Rafraîchir la liste des clients
         std::vector<Client> clients = ClientManager::listClients();
         clientGrid->ClearGrid();
         if (clientGrid->GetNumberRows() > 0) {
@@ -126,6 +185,7 @@ void MaFrame::InitClientsTab() {
 
     m_notebook->AddPage(panel, "Clients", true);
 }
+
 
 void MaFrame::InitTreksTab() {
     wxPanel* panel = new wxPanel(m_notebook, wxID_ANY);
@@ -148,8 +208,8 @@ void MaFrame::InitTreksTab() {
 void MaFrame::InitReservationsTab() {
     wxPanel* panel = new wxPanel(m_notebook, wxID_ANY);
 
-    wxButton* addReservationButton = new wxButton(panel, wxID_ANY, "Ajouter Réservation", wxPoint(10, 10));
-    wxButton* listReservationsButton = new wxButton(panel, wxID_ANY, "Lister Réservations", wxPoint(150, 10));
+    wxButton* addReservationButton = new wxButton(panel, wxID_ANY, "Ajouter Reservation", wxPoint(10, 10));
+    wxButton* listReservationsButton = new wxButton(panel, wxID_ANY, "Lister Reservations", wxPoint(150, 10));
 
     wxGrid* reservationGrid = new wxGrid(panel, wxID_ANY, wxPoint(10, 50), wxSize(760, 400));
     reservationGrid->CreateGrid(0, 5);
@@ -159,5 +219,5 @@ void MaFrame::InitReservationsTab() {
     reservationGrid->SetColLabelValue(3, "Date");
     reservationGrid->SetColLabelValue(4, "Statut");
 
-    m_notebook->AddPage(panel, "Réservations", false);
+    m_notebook->AddPage(panel, "Reservations", false);
 }

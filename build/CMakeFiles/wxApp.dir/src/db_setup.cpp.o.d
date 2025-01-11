@@ -1,7 +1,7 @@
 CMakeFiles/wxApp.dir/src/db_setup.cpp.o: \
- /home/cd2groupea/Documents/AgenceVoyageIHM/src/db_setup.cpp \
+ /home/major/Documents/AgenceVoyageCpp/src/db_setup.cpp \
  /usr/include/stdc-predef.h \
- /home/cd2groupea/Documents/AgenceVoyageIHM/src/db_setup.h \
+ /home/major/Documents/AgenceVoyageCpp/src/db_setup.h \
  /usr/include/mysql_driver.h /usr/include/boost/scoped_ptr.hpp \
  /usr/include/boost/smart_ptr/scoped_ptr.hpp \
  /usr/include/boost/config.hpp /usr/include/boost/config/user.hpp \

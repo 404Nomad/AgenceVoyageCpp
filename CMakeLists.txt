@@ -16,6 +16,9 @@ find_library(MYSQL_LIB mysqlcppconn REQUIRED)
 set(SOURCES 
     src/main.cpp 
     src/Client.cpp 
+    src/Trek.cpp
+    src/Reservation.cpp
+    src/Client/ClientEditDialog.cpp
     src/db_setup.cpp)
 
 # Include directories
