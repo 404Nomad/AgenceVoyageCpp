@@ -202,19 +202,137 @@ void MaFrame::InitTreksTab() {
     wxPanel* panel = new wxPanel(m_notebook, wxID_ANY);
 
     wxButton* addTrekButton = new wxButton(panel, wxID_ANY, "Ajouter Trek", wxPoint(10, 10));
-    wxButton* listTreksButton = new wxButton(panel, wxID_ANY, "Lister Treks", wxPoint(150, 10));
+    wxButton* editTrekButton = new wxButton(panel, wxID_ANY, "Modifier Trek", wxPoint(150, 10));
+    wxButton* listTreksButton = new wxButton(panel, wxID_ANY, "Lister Treks", wxPoint(300, 10));
 
-    // Placeholder grid for treks
+    // Grille pour afficher les treks
     wxGrid* trekGrid = new wxGrid(panel, wxID_ANY, wxPoint(10, 50), wxSize(760, 400));
     trekGrid->CreateGrid(0, 5);
     trekGrid->SetColLabelValue(0, "ID");
     trekGrid->SetColLabelValue(1, "Nom");
     trekGrid->SetColLabelValue(2, "Lieu");
-    trekGrid->SetColLabelValue(3, "Duree");
+    trekGrid->SetColLabelValue(3, "Duree (Jours)");
     trekGrid->SetColLabelValue(4, "Prix");
+
+    // Ajuster la taille des colonnes
+    trekGrid->SetColSize(0, 50);  // ID
+    trekGrid->SetColSize(1, 150); // Nom
+    trekGrid->SetColSize(2, 150); // Lieu
+    trekGrid->SetColSize(3, 100); // Durée
+    trekGrid->SetColSize(4, 100); // Prix
+
+    // Ajuster la taille des lignes (optionnel)
+    trekGrid->SetDefaultRowSize(30, true);
+
+    // Fonction pour rafraîchir la grille des treks
+    auto refreshTrekGrid = [trekGrid]() {
+        std::vector<Trek> treks = TrekManager::listTreks();
+        trekGrid->ClearGrid();
+        if (trekGrid->GetNumberRows() > 0) {
+            trekGrid->DeleteRows(0, trekGrid->GetNumberRows());
+        }
+        for (const auto& trek : treks) {
+            trekGrid->AppendRows(1);
+            int lastRow = trekGrid->GetNumberRows() - 1;
+            trekGrid->SetCellValue(lastRow, 0, std::to_string(trek.id));
+            trekGrid->SetCellValue(lastRow, 1, trek.nom);
+            trekGrid->SetCellValue(lastRow, 2, trek.lieu);
+            trekGrid->SetCellValue(lastRow, 3, std::to_string(trek.duree));
+            trekGrid->SetCellValue(lastRow, 4, std::to_string(trek.prix));
+        }
+    };
+
+    // Charger les treks lors de l'ouverture de l'onglet
+    refreshTrekGrid();
+
+    // Lier les événements
+    addTrekButton->Bind(wxEVT_BUTTON, [this, trekGrid, refreshTrekGrid](wxCommandEvent&) {
+        Trek newTrek;
+        newTrek.nom = "Nouveau Trek";
+        newTrek.lieu = "Lieu Test";
+        newTrek.duree = 5;
+        newTrek.prix = 300.0;
+        newTrek.niveau_difficulte = "Facile";
+        newTrek.description = "Description test";
+
+        TrekManager::addTrek(newTrek);
+        wxMessageBox("Trek ajoute avec succes !", "Succès", wxOK | wxICON_INFORMATION);
+
+        refreshTrekGrid();
+    });
+
+    editTrekButton->Bind(wxEVT_BUTTON, [this, trekGrid, refreshTrekGrid](wxCommandEvent&) {
+        int selectedRow = trekGrid->GetGridCursorRow();
+        if (selectedRow != wxNOT_FOUND) {
+            // Récupérer les données du trek sélectionné
+            Trek trekToEdit;
+            trekToEdit.id = std::stoi(trekGrid->GetCellValue(selectedRow, 0).ToStdString());
+            trekToEdit.nom = trekGrid->GetCellValue(selectedRow, 1).ToStdString();
+            trekToEdit.lieu = trekGrid->GetCellValue(selectedRow, 2).ToStdString();
+            trekToEdit.duree = std::stoi(trekGrid->GetCellValue(selectedRow, 3).ToStdString());
+            trekToEdit.prix = std::stod(trekGrid->GetCellValue(selectedRow, 4).ToStdString());
+
+            // Afficher un formulaire pour modifier les informations du trek
+            wxDialog editDialog(this, wxID_ANY, "Modifier Trek", wxDefaultPosition, wxSize(390, 400));
+
+            wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
+
+            // Nom
+            mainSizer->Add(new wxStaticText(&editDialog, wxID_ANY, "Nom:"), 0, wxALL, 5);
+            wxTextCtrl* nomCtrl = new wxTextCtrl(&editDialog, wxID_ANY, trekToEdit.nom);
+            mainSizer->Add(nomCtrl, 0, wxALL | wxEXPAND, 5);
+
+            // Lieu
+            mainSizer->Add(new wxStaticText(&editDialog, wxID_ANY, "Lieu:"), 0, wxALL, 5);
+            wxTextCtrl* lieuCtrl = new wxTextCtrl(&editDialog, wxID_ANY, trekToEdit.lieu);
+            mainSizer->Add(lieuCtrl, 0, wxALL | wxEXPAND, 5);
+
+            // Durée
+            mainSizer->Add(new wxStaticText(&editDialog, wxID_ANY, "Duree (Jours):"), 0, wxALL, 5);
+            wxTextCtrl* dureeCtrl = new wxTextCtrl(&editDialog, wxID_ANY, std::to_string(trekToEdit.duree));
+            mainSizer->Add(dureeCtrl, 0, wxALL | wxEXPAND, 5);
+
+            // Prix
+            mainSizer->Add(new wxStaticText(&editDialog, wxID_ANY, "Prix (EUR):"), 0, wxALL, 5);
+            wxTextCtrl* prixCtrl = new wxTextCtrl(&editDialog, wxID_ANY, std::to_string(trekToEdit.prix));
+            mainSizer->Add(prixCtrl, 0, wxALL | wxEXPAND, 5);
+
+            // Boutons OK et Annuler
+            wxBoxSizer* buttonSizer = new wxBoxSizer(wxHORIZONTAL);
+            wxButton* okButton = new wxButton(&editDialog, wxID_OK, "Enregistrer");
+            wxButton* cancelButton = new wxButton(&editDialog, wxID_CANCEL, "Annuler");
+            buttonSizer->Add(okButton, 0, wxALL, 5);
+            buttonSizer->Add(cancelButton, 0, wxALL, 5);
+            mainSizer->Add(buttonSizer, 0, wxALIGN_CENTER);
+
+            editDialog.SetSizer(mainSizer);
+            editDialog.Layout();
+
+            if (editDialog.ShowModal() == wxID_OK) {
+                // Mettre à jour les données avec les nouvelles valeurs
+                trekToEdit.nom = nomCtrl->GetValue().ToStdString();
+                trekToEdit.lieu = lieuCtrl->GetValue().ToStdString();
+                trekToEdit.duree = std::stoi(dureeCtrl->GetValue().ToStdString());
+                trekToEdit.prix = std::stod(prixCtrl->GetValue().ToStdString());
+
+                // Mise à jour dans la base de données
+                TrekManager::updateTrek(trekToEdit);
+                wxMessageBox("Trek modifie avec succes !", "Succès", wxOK | wxICON_INFORMATION);
+
+                refreshTrekGrid();
+            }
+        } else {
+            wxMessageBox("Veuillez selectionner un trek a modifier.", "Erreur", wxOK | wxICON_WARNING);
+        }
+    });
+
+    listTreksButton->Bind(wxEVT_BUTTON, [refreshTrekGrid](wxCommandEvent&) {
+        refreshTrekGrid();
+    });
 
     m_notebook->AddPage(panel, "Treks", false);
 }
+
 
 void MaFrame::InitReservationsTab() {
     wxPanel* panel = new wxPanel(m_notebook, wxID_ANY);
