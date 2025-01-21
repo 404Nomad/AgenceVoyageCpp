@@ -74,7 +74,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : " -pthread"
+					"fragment" : " -pthread -g"
 				},
 				{
 					"fragment" : "-std=gnu++20"
@@ -138,7 +138,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "-pthread",
+				"fragment" : "-pthread -g",
 				"role" : "flags"
 			},
 			{

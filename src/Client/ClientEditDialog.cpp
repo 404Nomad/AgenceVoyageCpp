@@ -1,13 +1,13 @@
 #include "Client/ClientEditDialog.h"
 
 ClientEditDialog::ClientEditDialog(wxWindow* parent, const Client& clientToEdit)
-    : wxDialog(parent, wxID_ANY, "Modifier Client", wxDefaultPosition, wxSize(400, 420)) {
+    : wxDialog(parent, wxID_ANY, "Modifier Client", wxDefaultPosition, wxSize(420, 400)) {
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
 
-    // Titre
-    wxStaticText* title = new wxStaticText(this, wxID_ANY, "Modifier les informations du client", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
-    title->SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
-    mainSizer->Add(title, 0, wxALL | wxALIGN_CENTER_HORIZONTAL, 10);
+    // // Titre
+    // wxStaticText* title = new wxStaticText(this, wxID_ANY, "Modifier les informations du client", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+    // title->SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
+    // mainSizer->Add(title, 0, wxALL | wxALIGN_CENTER_HORIZONTAL, 10);
 
     // Nom
     mainSizer->Add(new wxStaticText(this, wxID_ANY, "Nom:"), 0, wxALL, 5);

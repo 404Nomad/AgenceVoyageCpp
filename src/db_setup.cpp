@@ -60,8 +60,8 @@ void DatabaseInitializer::initializeDatabase() {
         // Insert fixtures for Treks
         stmt->execute(
             "INSERT IGNORE INTO Treks(nom, lieu, duree, prix, niveau_difficulte, description) VALUES "
-            "('Mont Blanc', 'Alpes', 5, 500.00, 'Difficile', 'Une randonnée exigeante mais gratifiante.'),"
-            "('Sentier des douaniers', 'Bretagne', 3, 300.00, 'Facile', 'Un trek le long des côtes bretonnes.');"
+            "('Mont Blanc', 'Alpes', 5, 500.00, 'Difficile', 'Une randonnee exigeante mais gratifiante.'),"
+            "('Sentier des douaniers', 'Bretagne', 3, 300.00, 'Facile', 'Un trek le long des cotes bretonnes.');"
         );
 
         // Insert fixtures for Reservations

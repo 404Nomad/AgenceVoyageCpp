@@ -16,13 +16,13 @@ std::string getCurrentDate() {
 class ClientAddDialog : public wxDialog {
 public:
     ClientAddDialog(wxWindow* parent)
-        : wxDialog(parent, wxID_ANY, "Ajouter un Client", wxDefaultPosition, wxSize(420, 480)) {
+        : wxDialog(parent, wxID_ANY, "Ajouter un Client", wxDefaultPosition, wxSize(420, 460)) {
         wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
 
-        // Titre
-        wxStaticText* title = new wxStaticText(this, wxID_ANY, "Ajouter un nouveau client", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
-        title->SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
-        mainSizer->Add(title, 0, wxALL | wxALIGN_CENTER_HORIZONTAL, 10);
+        // // Titre
+        // wxStaticText* title = new wxStaticText(this, wxID_ANY, "Ajouter un nouveau client", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+        // title->SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
+        // mainSizer->Add(title, 0, wxALL | wxALIGN_CENTER_HORIZONTAL, 10);
 
         // Nom
         mainSizer->Add(new wxStaticText(this, wxID_ANY, "Nom:"), 0, wxALL, 5);
