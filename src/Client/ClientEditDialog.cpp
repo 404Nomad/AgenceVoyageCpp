@@ -1,7 +1,7 @@
 #include "Client/ClientEditDialog.h"
 
 ClientEditDialog::ClientEditDialog(wxWindow* parent, const Client& clientToEdit)
-    : wxDialog(parent, wxID_ANY, "Modifier Client", wxDefaultPosition, wxSize(500, 400)) {
+    : wxDialog(parent, wxID_ANY, "Modifier Client", wxDefaultPosition, wxSize(400, 400)) {
     wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
     // Nom

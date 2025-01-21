@@ -4,6 +4,7 @@
 #include <wx/grid.h>
 #include <wx/notebook.h>
 #include "Client/ClientEditDialog.h"
+#include "Client/ClientAddDialog.cpp"
 #include "Client.h" // Inclure la gestion des clients
 #include "Trek.h"   // Inclure la gestion des treks
 #include "Reservation.h" // Inclure la gestion des reservations
@@ -91,8 +92,8 @@ void MaFrame::InitClientsTab() {
 
     wxButton* addButton = new wxButton(panel, wxID_ANY, "Ajouter Client", wxPoint(10, 10));
     wxButton* editButton = new wxButton(panel, wxID_ANY, "Modifier Client", wxPoint(150, 10));
-    wxButton* deleteButton = new wxButton(panel, wxID_ANY, "Supprimer Client", wxPoint(290, 10));
-    wxButton* listButton = new wxButton(panel, wxID_ANY, "Lister Clients", wxPoint(430, 10));
+    wxButton* deleteButton = new wxButton(panel, wxID_ANY, "Supprimer Client", wxPoint(300, 10));
+    wxButton* listButton = new wxButton(panel, wxID_ANY, "Lister Clients", wxPoint(460, 10));
 
     wxGrid* clientGrid = new wxGrid(panel, wxID_ANY, wxPoint(10, 50), wxSize(760, 400));
     clientGrid->CreateGrid(0, 5);
@@ -103,20 +104,30 @@ void MaFrame::InitClientsTab() {
     clientGrid->SetColLabelValue(4, "Telephone");
 
     // Lier les événements
-    addButton->Bind(wxEVT_BUTTON, [this](wxCommandEvent&) {
-        // Ajouter un client via une boîte de dialogue
-        wxTextEntryDialog dlg(this, "Nom du Client :", "Ajouter Client");
+    addButton->Bind(wxEVT_BUTTON, [this, clientGrid](wxCommandEvent&) {
+        ClientAddDialog dlg(this);
         if (dlg.ShowModal() == wxID_OK) {
             Client newClient;
-            newClient.nom = dlg.GetValue().ToStdString();
-            newClient.prenom = "PrénomTest"; // Vous pouvez étendre avec un formulaire complet
-            newClient.email = "email@example.com";
-            newClient.telephone = "0123456789";
-            newClient.date_inscription = "2023-01-01"; // Date actuelle à calculer dynamiquement
+            newClient.nom = dlg.GetNom();
+            newClient.prenom = dlg.GetPrenom();
+            newClient.email = dlg.GetEmail();
+            newClient.telephone = dlg.GetTelephone();
+            newClient.date_inscription = dlg.GetDate();
+
             ClientManager::addClient(newClient);
-            wxMessageBox("Client ajouté avec succès !", "Succès", wxOK | wxICON_INFORMATION);
+            wxMessageBox("Client ajoute avec succes !", "Succès", wxOK | wxICON_INFORMATION);
+
+            // Mettre à jour la grille, Mise a jour UI
+            int newRow = clientGrid->GetNumberRows();
+            clientGrid->AppendRows(1);
+            clientGrid->SetCellValue(newRow, 0, std::to_string(newClient.id));
+            clientGrid->SetCellValue(newRow, 1, newClient.nom);
+            clientGrid->SetCellValue(newRow, 2, newClient.prenom);
+            clientGrid->SetCellValue(newRow, 3, newClient.email);
+            clientGrid->SetCellValue(newRow, 4, newClient.telephone);
         }
     });
+
 
     editButton->Bind(wxEVT_BUTTON, [this, clientGrid](wxCommandEvent&) {
         int selectedRow = clientGrid->GetGridCursorRow();

@@ -1,5 +1,5 @@
 CMakeFiles/wxApp.dir/src/main.cpp.o: \
- /home/major/Documents/AgenceVoyageCpp/src/main.cpp \
+ /home/cd2groupea/Documents/AgenceVoyageCpp/src/main.cpp \
  /usr/include/stdc-predef.h /usr/include/wx-3.2/wx/wx.h \
  /usr/include/wx-3.2/wx/defs.h /usr/include/wx-3.2/wx/platform.h \
  /usr/include/wx-3.2/wx/compiler.h \
@@ -396,9 +396,21 @@ CMakeFiles/wxApp.dir/src/main.cpp.o: \
  /usr/include/wx-3.2/wx/withimages.h /usr/include/wx-3.2/wx/imaglist.h \
  /usr/include/wx-3.2/wx/generic/imaglist.h \
  /usr/include/wx-3.2/wx/gtk/notebook.h \
- /home/major/Documents/AgenceVoyageCpp/src/Client/ClientEditDialog.h \
- /home/major/Documents/AgenceVoyageCpp/src/Client.h \
- /home/major/Documents/AgenceVoyageCpp/src/Client.h \
- /home/major/Documents/AgenceVoyageCpp/src/Trek.h \
- /home/major/Documents/AgenceVoyageCpp/src/Reservation.h \
- /home/major/Documents/AgenceVoyageCpp/src/db_setup.h
+ /home/cd2groupea/Documents/AgenceVoyageCpp/src/Client/ClientEditDialog.h \
+ /home/cd2groupea/Documents/AgenceVoyageCpp/src/Client.h \
+ /home/cd2groupea/Documents/AgenceVoyageCpp/src/Client/ClientAddDialog.cpp \
+ /usr/include/c++/11/ctime /usr/include/c++/11/iomanip \
+ /usr/include/c++/11/locale \
+ /usr/include/c++/11/bits/locale_facets_nonio.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/time_members.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/messages_members.h \
+ /usr/include/libintl.h /usr/include/c++/11/bits/codecvt.h \
+ /usr/include/c++/11/bits/locale_facets_nonio.tcc \
+ /usr/include/c++/11/bits/locale_conv.h \
+ /usr/include/c++/11/bits/unique_ptr.h \
+ /usr/include/c++/11/bits/quoted_string.h /usr/include/c++/11/sstream \
+ /usr/include/c++/11/bits/sstream.tcc \
+ /home/cd2groupea/Documents/AgenceVoyageCpp/src/Client.h \
+ /home/cd2groupea/Documents/AgenceVoyageCpp/src/Trek.h \
+ /home/cd2groupea/Documents/AgenceVoyageCpp/src/Reservation.h \
+ /home/cd2groupea/Documents/AgenceVoyageCpp/src/db_setup.h

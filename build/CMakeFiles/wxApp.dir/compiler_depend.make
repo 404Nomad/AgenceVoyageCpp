@@ -1793,11 +1793,44 @@ CMakeFiles/wxApp.dir/src/main.cpp.o: ../src/main.cpp \
   /usr/include/wx-3.2/wx/gtk/notebook.h \
   ../src/Client/ClientEditDialog.h \
   ../src/Client.h \
+  ../src/Client/ClientAddDialog.cpp \
+  /usr/include/c++/11/ctime \
+  /usr/include/c++/11/iomanip \
+  /usr/include/c++/11/locale \
+  /usr/include/c++/11/bits/locale_facets_nonio.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/time_members.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/messages_members.h \
+  /usr/include/libintl.h \
+  /usr/include/c++/11/bits/codecvt.h \
+  /usr/include/c++/11/bits/locale_facets_nonio.tcc \
+  /usr/include/c++/11/bits/locale_conv.h \
+  /usr/include/c++/11/bits/unique_ptr.h \
+  /usr/include/c++/11/bits/quoted_string.h \
+  /usr/include/c++/11/sstream \
+  /usr/include/c++/11/bits/sstream.tcc \
   ../src/Client.h \
   ../src/Trek.h \
   ../src/Reservation.h \
   ../src/db_setup.h
 
+
+/usr/include/c++/11/bits/sstream.tcc:
+
+/usr/include/c++/11/sstream:
+
+/usr/include/c++/11/bits/quoted_string.h:
+
+/usr/include/c++/11/bits/locale_facets_nonio.tcc:
+
+/usr/include/c++/11/bits/codecvt.h:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/time_members.h:
+
+/usr/include/c++/11/bits/locale_facets_nonio.h:
+
+/usr/include/c++/11/ctime:
+
+../src/Client/ClientAddDialog.cpp:
 
 /usr/include/wx-3.2/wx/gtk/notebook.h:
 
@@ -2031,6 +2064,8 @@ CMakeFiles/wxApp.dir/src/main.cpp.o: ../src/main.cpp \
 
 /usr/include/c++/11/ostream:
 
+/usr/include/c++/11/bits/locale_conv.h:
+
 /usr/include/wx-3.2/wx/utils.h:
 
 /usr/include/wx-3.2/wx/any.h:
@@ -2085,11 +2120,15 @@ CMakeFiles/wxApp.dir/src/main.cpp.o: ../src/main.cpp \
 
 ../src/Reservation.h:
 
+/usr/include/c++/11/locale:
+
 /usr/include/wx-3.2/wx/dcmemory.h:
 
 /usr/include/wx-3.2/wx/afterstd.h:
 
 /usr/include/boost/config/compiler/gcc.hpp:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/messages_members.h:
 
 /usr/include/c++/11/bits/basic_ios.h:
 
@@ -2499,6 +2538,8 @@ CMakeFiles/wxApp.dir/src/main.cpp.o: ../src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
 
+/usr/include/c++/11/iomanip:
+
 /usr/include/boost/shared_ptr.hpp:
 
 /usr/include/wx-3.2/wx/gtk/nonownedwnd.h:
@@ -2582,6 +2623,8 @@ CMakeFiles/wxApp.dir/src/main.cpp.o: ../src/main.cpp \
 /usr/include/c++/11/bits/stringfwd.h:
 
 /usr/include/asm-generic/errno-base.h:
+
+/usr/include/libintl.h:
 
 /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
 
