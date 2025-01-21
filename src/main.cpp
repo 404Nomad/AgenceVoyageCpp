@@ -83,7 +83,7 @@ void MaFrame::OnExit(wxCommandEvent& event) {
 }
 
 void MaFrame::OnAbout(wxCommandEvent& event) {
-    wxMessageBox("Application de gestion pour une agence de voyage spécialisée dans les treks.",
+    wxMessageBox("Application de gestion pour une agence de voyage specialisee dans les treks.",
                  "À propos", wxOK | wxICON_INFORMATION);
 }
 
@@ -103,8 +103,30 @@ void MaFrame::InitClientsTab() {
     clientGrid->SetColLabelValue(3, "Email");
     clientGrid->SetColLabelValue(4, "Telephone");
 
+    // Fonction pour rafraîchir la grille des clients
+    auto refreshClientGrid = [clientGrid]() {
+        std::vector<Client> clients = ClientManager::listClients();
+        clientGrid->ClearGrid();
+        if (clientGrid->GetNumberRows() > 0) {
+            clientGrid->DeleteRows(0, clientGrid->GetNumberRows());
+        }
+        for (const auto& client : clients) {
+            clientGrid->AppendRows(1);
+            int lastRow = clientGrid->GetNumberRows() - 1;
+            clientGrid->SetCellValue(lastRow, 0, std::to_string(client.id));
+            clientGrid->SetCellValue(lastRow, 1, client.nom);
+            clientGrid->SetCellValue(lastRow, 2, client.prenom);
+            clientGrid->SetCellValue(lastRow, 3, client.email);
+            clientGrid->SetCellValue(lastRow, 4, client.telephone);
+        }
+    };
+
+    // Charger les données au chargement de l'onglet
+    refreshClientGrid();
+
+
     // Lier les événements
-    addButton->Bind(wxEVT_BUTTON, [this, clientGrid](wxCommandEvent&) {
+    addButton->Bind(wxEVT_BUTTON, [this, clientGrid, refreshClientGrid](wxCommandEvent&) {
         ClientAddDialog dlg(this);
         if (dlg.ShowModal() == wxID_OK) {
             Client newClient;
@@ -117,19 +139,11 @@ void MaFrame::InitClientsTab() {
             ClientManager::addClient(newClient);
             wxMessageBox("Client ajoute avec succes !", "Succès", wxOK | wxICON_INFORMATION);
 
-            // Mettre à jour la grille, Mise a jour UI
-            int newRow = clientGrid->GetNumberRows();
-            clientGrid->AppendRows(1);
-            clientGrid->SetCellValue(newRow, 0, std::to_string(newClient.id));
-            clientGrid->SetCellValue(newRow, 1, newClient.nom);
-            clientGrid->SetCellValue(newRow, 2, newClient.prenom);
-            clientGrid->SetCellValue(newRow, 3, newClient.email);
-            clientGrid->SetCellValue(newRow, 4, newClient.telephone);
+            refreshClientGrid();
         }
     });
 
-
-    editButton->Bind(wxEVT_BUTTON, [this, clientGrid](wxCommandEvent&) {
+    editButton->Bind(wxEVT_BUTTON, [this, clientGrid, refreshClientGrid](wxCommandEvent&) {
         int selectedRow = clientGrid->GetGridCursorRow();
         if (selectedRow != wxNOT_FOUND) {
             // Récupérer les données du client sélectionné
@@ -152,50 +166,36 @@ void MaFrame::InitClientsTab() {
                 // Mettre à jour dans la base de données
                 ClientManager::updateClient(clientToEdit);
 
-                // Mettre à jour la grille
-                clientGrid->SetCellValue(selectedRow, 1, clientToEdit.nom);
-                clientGrid->SetCellValue(selectedRow, 2, clientToEdit.prenom);
-                clientGrid->SetCellValue(selectedRow, 3, clientToEdit.email);
-                clientGrid->SetCellValue(selectedRow, 4, clientToEdit.telephone);
-
                 wxMessageBox("Client modifie avec succes !", "Succès", wxOK | wxICON_INFORMATION);
+
+                refreshClientGrid();
             }
         } else {
             wxMessageBox("Veuillez sélectionner un client à modifier.", "Erreur", wxOK | wxICON_WARNING);
         }
     });
 
-
-    deleteButton->Bind(wxEVT_BUTTON, [=](wxCommandEvent&) {
+    deleteButton->Bind(wxEVT_BUTTON, [this, clientGrid, refreshClientGrid](wxCommandEvent&) {
         // Supprimer un client
         int selectedRow = clientGrid->GetGridCursorRow();
         if (selectedRow != wxNOT_FOUND) {
             int clientId = std::stoi(clientGrid->GetCellValue(selectedRow, 0).ToStdString());
             ClientManager::deleteClient(clientId);
-            wxMessageBox("Client supprimé avec succès !", "Succès", wxOK | wxICON_INFORMATION);
+            wxMessageBox("Client supprime avec succes !", "Succès", wxOK | wxICON_INFORMATION);
+
+            refreshClientGrid();
+        } else {
+            wxMessageBox("Veuillez sélectionner un client à supprimer.", "Erreur", wxOK | wxICON_WARNING);
         }
     });
 
-    listButton->Bind(wxEVT_BUTTON, [=](wxCommandEvent&) {
-        // Rafraîchir la liste des clients
-        std::vector<Client> clients = ClientManager::listClients();
-        clientGrid->ClearGrid();
-        if (clientGrid->GetNumberRows() > 0) {
-            clientGrid->DeleteRows(0, clientGrid->GetNumberRows());
-        }
-        for (const auto& client : clients) {
-            clientGrid->AppendRows(1);
-            int lastRow = clientGrid->GetNumberRows() - 1;
-            clientGrid->SetCellValue(lastRow, 0, std::to_string(client.id));
-            clientGrid->SetCellValue(lastRow, 1, client.nom);
-            clientGrid->SetCellValue(lastRow, 2, client.prenom);
-            clientGrid->SetCellValue(lastRow, 3, client.email);
-            clientGrid->SetCellValue(lastRow, 4, client.telephone);
-        }
+    listButton->Bind(wxEVT_BUTTON, [refreshClientGrid](wxCommandEvent&) {
+        refreshClientGrid();
     });
 
     m_notebook->AddPage(panel, "Clients", true);
 }
+
 
 
 void MaFrame::InitTreksTab() {

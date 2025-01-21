@@ -3,7 +3,6 @@
 #include <iomanip>
 #include <sstream>
 #include "Client.h"
-#include "Client.h"
 
 // Fonction pour obtenir la date actuelle sous forme de chaîne (YYYY-MM-DD)
 std::string getCurrentDate() {
@@ -17,41 +16,56 @@ std::string getCurrentDate() {
 class ClientAddDialog : public wxDialog {
 public:
     ClientAddDialog(wxWindow* parent)
-        : wxDialog(parent, wxID_ANY, "Ajouter un Client", wxDefaultPosition, wxSize(400, 400)) {
-        wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+        : wxDialog(parent, wxID_ANY, "Ajouter un Client", wxDefaultPosition, wxSize(420, 480)) {
+        wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
 
-        // Champs d'entrée
-        wxFlexGridSizer* gridSizer = new wxFlexGridSizer(2, 10, 10);
-        gridSizer->Add(new wxStaticText(this, wxID_ANY, "Nom:"));
-        m_nomCtrl = new wxTextCtrl(this, wxID_ANY);
-        gridSizer->Add(m_nomCtrl);
+        // Titre
+        wxStaticText* title = new wxStaticText(this, wxID_ANY, "Ajouter un nouveau client", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
+        title->SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
+        mainSizer->Add(title, 0, wxALL | wxALIGN_CENTER_HORIZONTAL, 10);
 
-        gridSizer->Add(new wxStaticText(this, wxID_ANY, "Prenom:"));
-        m_prenomCtrl = new wxTextCtrl(this, wxID_ANY);
-        gridSizer->Add(m_prenomCtrl);
+        // Nom
+        mainSizer->Add(new wxStaticText(this, wxID_ANY, "Nom:"), 0, wxALL, 5);
+        m_nomCtrl = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(350, -1));
+        mainSizer->Add(m_nomCtrl, 0, wxALL | wxEXPAND, 5);
 
-        gridSizer->Add(new wxStaticText(this, wxID_ANY, "Email:"));
-        m_emailCtrl = new wxTextCtrl(this, wxID_ANY);
-        gridSizer->Add(m_emailCtrl);
+        // Prénom
+        mainSizer->Add(new wxStaticText(this, wxID_ANY, "Prenom:"), 0, wxALL, 5);
+        m_prenomCtrl = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(350, -1));
+        mainSizer->Add(m_prenomCtrl, 0, wxALL | wxEXPAND, 5);
 
-        gridSizer->Add(new wxStaticText(this, wxID_ANY, "Telephone:"));
-        m_telephoneCtrl = new wxTextCtrl(this, wxID_ANY);
-        gridSizer->Add(m_telephoneCtrl);
+        // Email
+        mainSizer->Add(new wxStaticText(this, wxID_ANY, "Email:"), 0, wxALL, 5);
+        m_emailCtrl = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(350, -1));
+        mainSizer->Add(m_emailCtrl, 0, wxALL | wxEXPAND, 5);
 
-        gridSizer->Add(new wxStaticText(this, wxID_ANY, "Date d'inscription:"));
-        m_dateCtrl = new wxTextCtrl(this, wxID_ANY, getCurrentDate());
+        // Téléphone
+        mainSizer->Add(new wxStaticText(this, wxID_ANY, "Telephone:"), 0, wxALL, 5);
+        m_telephoneCtrl = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(350, -1));
+        mainSizer->Add(m_telephoneCtrl, 0, wxALL | wxEXPAND, 5);
+
+        // Date d'inscription
+        mainSizer->Add(new wxStaticText(this, wxID_ANY, "Date d'inscription:"), 0, wxALL, 5);
+        m_dateCtrl = new wxTextCtrl(this, wxID_ANY, getCurrentDate(), wxDefaultPosition, wxSize(350, -1));
         m_dateCtrl->SetEditable(false); // La date est en lecture seule
-        gridSizer->Add(m_dateCtrl);
+        mainSizer->Add(m_dateCtrl, 0, wxALL | wxEXPAND, 5);
 
-        sizer->Add(gridSizer, 1, wxALL | wxEXPAND, 10);
-
-        // Boutons
+        // Boutons OK et Annuler
         wxBoxSizer* buttonSizer = new wxBoxSizer(wxHORIZONTAL);
-        buttonSizer->Add(new wxButton(this, wxID_OK, "Ajouter"), 0, wxALL, 5);
-        buttonSizer->Add(new wxButton(this, wxID_CANCEL, "Annuler"), 0, wxALL, 5);
-        sizer->Add(buttonSizer, 0, wxALIGN_CENTER);
+        wxButton* okButton = new wxButton(this, wxID_OK, "Ajouter"); // Bouton Valider
+        wxButton* cancelButton = new wxButton(this, wxID_CANCEL, "Annuler");
 
-        SetSizer(sizer);
+        buttonSizer->Add(okButton, 0, wxALL, 10);
+        buttonSizer->Add(cancelButton, 0, wxALL, 10);
+
+        mainSizer->Add(buttonSizer, 0, wxALIGN_CENTER);
+
+        // Ajout du padding global
+        wxSizer* paddingSizer = new wxBoxSizer(wxVERTICAL);
+        paddingSizer->Add(mainSizer, 1, wxALL | wxEXPAND, 20);
+        SetSizer(paddingSizer);
+
+        Layout();
     }
 
     std::string GetNom() const { return m_nomCtrl->GetValue().ToStdString(); }
