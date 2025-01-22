@@ -8,6 +8,7 @@
 #include <memory>
 #include <iostream>
 
+// Liste tous les treks 
 std::vector<Trek> TrekManager::listTreks() {
     std::vector<Trek> treks;
 
@@ -37,6 +38,7 @@ std::vector<Trek> TrekManager::listTreks() {
     return treks;
 }
 
+// Ajouter un trek
 void TrekManager::addTrek(const Trek& trek) {
     try {
         sql::mysql::MySQL_Driver* driver = sql::mysql::get_mysql_driver_instance();
@@ -54,6 +56,7 @@ void TrekManager::addTrek(const Trek& trek) {
     }
 }
 
+// Mettre à jour un trek
 void TrekManager::updateTrek(const Trek& trek) {
     try {
         sql::mysql::MySQL_Driver* driver = sql::mysql::get_mysql_driver_instance();
@@ -72,6 +75,7 @@ void TrekManager::updateTrek(const Trek& trek) {
     }
 }
 
+// Supprime un trek
 void TrekManager::deleteTrek(int trekId) {
     try {
         sql::mysql::MySQL_Driver* driver = sql::mysql::get_mysql_driver_instance();

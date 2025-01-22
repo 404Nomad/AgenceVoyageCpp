@@ -11,6 +11,7 @@
 // `MySQLBase` contient la logique de connexion
 #include "db_setup.h"
 
+// Liste tous les clients
 std::vector<Client> ClientManager::listClients() {
     std::vector<Client> clients;
 
@@ -39,6 +40,7 @@ std::vector<Client> ClientManager::listClients() {
     return clients;
 }
 
+// Ajoute un client
 void ClientManager::addClient(const Client& client) {
     try {
         sql::mysql::MySQL_Driver* driver = sql::mysql::get_mysql_driver_instance();
@@ -56,6 +58,7 @@ void ClientManager::addClient(const Client& client) {
     }
 }
 
+// Mettre à jour un client
 void ClientManager::updateClient(const Client& client) {
     try {
         sql::mysql::MySQL_Driver* driver = sql::mysql::get_mysql_driver_instance();
@@ -72,6 +75,7 @@ void ClientManager::updateClient(const Client& client) {
     }
 }
 
+// Supprime un client
 void ClientManager::deleteClient(int clientId) {
     try {
         sql::mysql::MySQL_Driver* driver = sql::mysql::get_mysql_driver_instance();

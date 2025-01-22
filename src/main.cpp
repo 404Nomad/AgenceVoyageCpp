@@ -49,7 +49,7 @@ bool MonApp::OnInit() {
     return true;
 }
 
-// 1024x768
+// Resolution : 1024x768
 MaFrame::MaFrame(const wxString& title)
     : wxFrame(nullptr, wxID_ANY, title, wxDefaultPosition, wxSize(1024, 768)) {
     try {
@@ -88,7 +88,7 @@ void MaFrame::OnAbout(wxCommandEvent& event) {
                  "À propos", wxOK | wxICON_INFORMATION);
 }
 
-// 760x400 > 973, 512
+// Resolution : 760x400 > 973, 512
 void MaFrame::InitClientsTab() {
     wxPanel* panel = new wxPanel(m_notebook, wxID_ANY);
 
@@ -212,7 +212,7 @@ void MaFrame::InitClientsTab() {
     m_notebook->AddPage(panel, "Clients", true);
 }
 
-// 760x400 > 973, 512
+// Resolution : 760x400 > 973, 512
 void MaFrame::InitTreksTab() {
     wxPanel* panel = new wxPanel(m_notebook, wxID_ANY);
 
@@ -450,7 +450,7 @@ void MaFrame::InitTreksTab() {
     m_notebook->AddPage(panel, "Treks", false);
 }
 
-// 760x400 > 973, 512
+// Resolution : 760x400 > 973, 512
 void MaFrame::InitReservationsTab() {
     wxPanel* panel = new wxPanel(m_notebook, wxID_ANY);
 
@@ -464,6 +464,123 @@ void MaFrame::InitReservationsTab() {
     reservationGrid->SetColLabelValue(2, "Trek");
     reservationGrid->SetColLabelValue(3, "Date");
     reservationGrid->SetColLabelValue(4, "Statut");
+
+    // Rafraîchir la grille des réservations
+    auto refreshReservationGrid = [reservationGrid]() {
+        std::vector<Reservation> reservations = ReservationManager::listReservations();
+        reservationGrid->ClearGrid();
+        if (reservationGrid->GetNumberRows() > 0) {
+            reservationGrid->DeleteRows(0, reservationGrid->GetNumberRows());
+        }
+        for (const auto& reservation : reservations) {
+            reservationGrid->AppendRows(1);
+            int lastRow = reservationGrid->GetNumberRows() - 1;
+            reservationGrid->SetCellValue(lastRow, 0, std::to_string(reservation.id));
+            reservationGrid->SetCellValue(lastRow, 1, std::to_string(reservation.clientId));
+            reservationGrid->SetCellValue(lastRow, 2, std::to_string(reservation.trekId));
+            reservationGrid->SetCellValue(lastRow, 3, reservation.dateReservation);
+            reservationGrid->SetCellValue(lastRow, 4, reservation.statut);
+        }
+    };
+
+   // Ajout et suppression de réservations avec sélection via dropdown
+    addReservationButton->Bind(wxEVT_BUTTON, [this, reservationGrid, refreshReservationGrid](wxCommandEvent&) {
+        wxDialog addDialog(this, wxID_ANY, "Ajouter une Reservation", wxDefaultPosition, wxSize(400, 400));
+
+        wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
+
+        // Client dropdown
+        mainSizer->Add(new wxStaticText(&addDialog, wxID_ANY, "Client:"), 0, wxALL, 5);
+        wxChoice* clientDropdown = new wxChoice(&addDialog, wxID_ANY);
+        for (const auto& client : ClientManager::listClients()) {
+            clientDropdown->Append(std::to_string(client.id) + " - " + client.nom + " " + client.prenom);
+        }
+        mainSizer->Add(clientDropdown, 0, wxALL | wxEXPAND, 5);
+
+        // Trek dropdown
+        mainSizer->Add(new wxStaticText(&addDialog, wxID_ANY, "Trek:"), 0, wxALL, 5);
+        wxChoice* trekDropdown = new wxChoice(&addDialog, wxID_ANY);
+        for (const auto& trek : TrekManager::listTreks()) {
+            trekDropdown->Append(std::to_string(trek.id) + " - " + trek.nom);
+        }
+        mainSizer->Add(trekDropdown, 0, wxALL | wxEXPAND, 5);
+
+        // Date de réservation
+        mainSizer->Add(new wxStaticText(&addDialog, wxID_ANY, "Date de reservation (YYYY-MM-DD):"), 0, wxALL, 5);
+        wxTextCtrl* dateCtrl = new wxTextCtrl(&addDialog, wxID_ANY);
+        mainSizer->Add(dateCtrl, 0, wxALL | wxEXPAND, 5);
+
+        // Statut
+        mainSizer->Add(new wxStaticText(&addDialog, wxID_ANY, "Statut:"), 0, wxALL, 5);
+        wxChoice* statutCtrl = new wxChoice(&addDialog, wxID_ANY);
+        statutCtrl->Append("Confirmee");
+        statutCtrl->Append("Annulee");
+        mainSizer->Add(statutCtrl, 0, wxALL | wxEXPAND, 5);
+
+        // Boutons OK et Annuler
+        wxBoxSizer* buttonSizer = new wxBoxSizer(wxHORIZONTAL);
+        wxButton* okButton = new wxButton(&addDialog, wxID_OK, "Ajouter");
+        wxButton* cancelButton = new wxButton(&addDialog, wxID_CANCEL, "Annuler");
+        buttonSizer->Add(okButton, 0, wxALL, 5);
+        buttonSizer->Add(cancelButton, 0, wxALL, 5);
+        mainSizer->Add(buttonSizer, 0, wxALIGN_CENTER);
+
+        addDialog.SetSizer(mainSizer);
+        addDialog.Layout();
+
+        if (addDialog.ShowModal() == wxID_OK) {
+            Reservation newReservation;
+
+            // Récupérer les IDs sélectionnés dans les dropdowns
+            try {
+                int clientIndex = clientDropdown->GetSelection();
+                int trekIndex = trekDropdown->GetSelection();
+                if (clientIndex == wxNOT_FOUND || trekIndex == wxNOT_FOUND) {
+                    throw std::runtime_error("Selection invalide");
+                }
+
+                std::string clientSelection = clientDropdown->GetString(clientIndex).ToStdString();
+                newReservation.clientId = std::stoi(clientSelection.substr(0, clientSelection.find(" - ")));
+
+                std::string trekSelection = trekDropdown->GetString(trekIndex).ToStdString();
+                newReservation.trekId = std::stoi(trekSelection.substr(0, trekSelection.find(" - ")));
+            } catch (...) {
+                wxMessageBox("Veuillez selectionner des valeurs valides pour le client et le trek.", "Erreur", wxOK | wxICON_WARNING);
+                return;
+            }
+
+            newReservation.dateReservation = dateCtrl->GetValue().ToStdString();
+            newReservation.statut = statutCtrl->GetStringSelection().ToStdString();
+
+            ReservationManager::addReservation(newReservation);
+            wxMessageBox("Reservation ajoutee avec succes !", "Succès", wxOK | wxICON_INFORMATION);
+
+            refreshReservationGrid();
+        }
+    });
+
+    listReservationsButton->Bind(wxEVT_BUTTON, [refreshReservationGrid](wxCommandEvent&) {
+        refreshReservationGrid();
+    });
+
+    refreshReservationGrid();
+    wxButton* deleteReservationButton = new wxButton(panel, wxID_ANY, "Supprimer Reservation", wxPoint(300, 10));
+    deleteReservationButton->Bind(wxEVT_BUTTON, [this, reservationGrid, refreshReservationGrid](wxCommandEvent&) {
+        int selectedRow = reservationGrid->GetGridCursorRow();
+        if (selectedRow != wxNOT_FOUND) {
+            int reservationId = std::stoi(reservationGrid->GetCellValue(selectedRow, 0).ToStdString());
+
+            int answer = wxMessageBox("Voulez-vous vraiment supprimer cette reservation ?", "Confirmation", wxYES_NO | wxICON_QUESTION);
+            if (answer == wxYES) {
+                ReservationManager::deleteReservation(reservationId);
+                wxMessageBox("Reservation supprimee avec succes !", "Succès", wxOK | wxICON_INFORMATION);
+                refreshReservationGrid();
+            }
+        } else {
+            wxMessageBox("Veuillez selectionner une reservation valide.", "Erreur", wxOK | wxICON_WARNING);
+        }
+    });
+
 
     m_notebook->AddPage(panel, "Reservations", false);
 }
