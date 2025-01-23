@@ -38,6 +38,9 @@ enum {
 wxIMPLEMENT_APP(MonApp);
 
 bool MonApp::OnInit() {
+    // Initialiser wxWidgets pour UTF-8
+    wxLocale locale;
+    locale.Init(wxLANGUAGE_DEFAULT);
 
     // Initialize database
     DatabaseInitializer::initializeDatabase();
@@ -455,7 +458,8 @@ void MaFrame::InitReservationsTab() {
     wxPanel* panel = new wxPanel(m_notebook, wxID_ANY);
 
     wxButton* addReservationButton = new wxButton(panel, wxID_ANY, "Ajouter Reservation", wxPoint(10, 10));
-    wxButton* listReservationsButton = new wxButton(panel, wxID_ANY, "Lister Reservations", wxPoint(150, 10));
+    wxButton* listReservationsButton = new wxButton(panel, wxID_ANY, "Lister Reservations", wxPoint(190, 10));
+    wxButton* deleteReservationButton = new wxButton(panel, wxID_ANY, "Supprimer Reservation", wxPoint(370, 10));
 
     wxGrid* reservationGrid = new wxGrid(panel, wxID_ANY, wxPoint(10, 50), wxSize(973, 512));
     reservationGrid->CreateGrid(0, 5);
@@ -463,7 +467,7 @@ void MaFrame::InitReservationsTab() {
     reservationGrid->SetColLabelValue(1, "Client");
     reservationGrid->SetColLabelValue(2, "Trek");
     reservationGrid->SetColLabelValue(3, "Date");
-    reservationGrid->SetColLabelValue(4, "Statut");
+    reservationGrid->SetColLabelValue(4, wxString::FromUTF8("Statut"));
 
     // Rafraîchir la grille des réservations
     auto refreshReservationGrid = [reservationGrid]() {
@@ -483,7 +487,10 @@ void MaFrame::InitReservationsTab() {
         }
     };
 
-   // Ajout et suppression de réservations avec sélection via dropdown
+    // Automatisation du chargement des données
+    refreshReservationGrid();
+
+    // Ajout de réservations avec sélection via dropdown
     addReservationButton->Bind(wxEVT_BUTTON, [this, reservationGrid, refreshReservationGrid](wxCommandEvent&) {
         wxDialog addDialog(this, wxID_ANY, "Ajouter une Reservation", wxDefaultPosition, wxSize(400, 400));
 
@@ -559,12 +566,12 @@ void MaFrame::InitReservationsTab() {
         }
     });
 
+    // Rafraîchir la grille des réservations avec bouton 
     listReservationsButton->Bind(wxEVT_BUTTON, [refreshReservationGrid](wxCommandEvent&) {
         refreshReservationGrid();
     });
 
-    refreshReservationGrid();
-    wxButton* deleteReservationButton = new wxButton(panel, wxID_ANY, "Supprimer Reservation", wxPoint(300, 10));
+    // Supprimer une reservation
     deleteReservationButton->Bind(wxEVT_BUTTON, [this, reservationGrid, refreshReservationGrid](wxCommandEvent&) {
         int selectedRow = reservationGrid->GetGridCursorRow();
         if (selectedRow != wxNOT_FOUND) {
