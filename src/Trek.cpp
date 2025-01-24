@@ -75,7 +75,6 @@ void TrekManager::updateTrek(const Trek& trek) {
     }
 }
 
-// Supprime un trek
 void TrekManager::deleteTrek(int trekId) {
     try {
         sql::mysql::MySQL_Driver* driver = sql::mysql::get_mysql_driver_instance();
@@ -83,8 +82,25 @@ void TrekManager::deleteTrek(int trekId) {
         con->setSchema("agencesqlctn");
 
         auto stmt = std::unique_ptr<sql::Statement>(con->createStatement());
-        stmt->execute("DELETE FROM Treks WHERE id=" + std::to_string(trekId) + ";");
+
+        // Vérifier si des réservations existent pour ce trek
+        auto res = std::unique_ptr<sql::ResultSet>(stmt->executeQuery(
+            "SELECT COUNT(*) AS count FROM Reservations WHERE trek_id = " + std::to_string(trekId) + ";"
+        ));
+
+        res->next();
+        int reservationCount = res->getInt("count");
+        if (reservationCount > 0) {
+            throw std::runtime_error("Des reservations existent pour ce trek. Suppression impossible.");
+        }
+
+        // Supprimer le trek
+        stmt->execute("DELETE FROM Treks WHERE id = " + std::to_string(trekId) + ";");
     } catch (const sql::SQLException& e) {
         std::cerr << "Erreur SQL (deleteTrek): " << e.what() << std::endl;
+        throw;
+    } catch (const std::runtime_error& e) {
+        std::cerr << "Erreur : " << e.what() << std::endl;
+        throw;
     }
 }

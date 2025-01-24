@@ -437,13 +437,20 @@ void MaFrame::InitTreksTab() {
         int selectedRow = trekGrid->GetGridCursorRow();
         if (selectedRow != wxNOT_FOUND) {
             int trekId = std::stoi(trekGrid->GetCellValue(selectedRow, 0).ToStdString());
-            TrekManager::deleteTrek(trekId);
-            wxMessageBox("Trek supprime avec succes !", "Succès", wxOK | wxICON_INFORMATION);
-            refreshTrekGrid();
+            try {
+                TrekManager::deleteTrek(trekId);
+                wxMessageBox("Trek supprime avec succes !", "Succès", wxOK | wxICON_INFORMATION);
+                refreshTrekGrid();
+            } catch (const std::runtime_error& e) {
+                wxMessageBox(e.what(), "Erreur", wxOK | wxICON_ERROR);
+            } catch (...) {
+                wxMessageBox("Une erreur est survenue lors de la suppression du trek.", "Erreur", wxOK | wxICON_ERROR);
+            }
         } else {
-            wxMessageBox("Veuillez selectionner un trek a supprimer.", "Erreur", wxOK | wxICON_WARNING);
+            wxMessageBox("Veuillez sélectionner un trek à supprimer.", "Erreur", wxOK | wxICON_WARNING);
         }
     });
+
 
 
     listTreksButton->Bind(wxEVT_BUTTON, [refreshTrekGrid](wxCommandEvent&) {
@@ -483,7 +490,7 @@ void MaFrame::InitReservationsTab() {
             reservationGrid->SetCellValue(lastRow, 1, std::to_string(reservation.clientId));
             reservationGrid->SetCellValue(lastRow, 2, std::to_string(reservation.trekId));
             reservationGrid->SetCellValue(lastRow, 3, reservation.dateReservation);
-            reservationGrid->SetCellValue(lastRow, 4, reservation.statut);
+            reservationGrid->SetCellValue(lastRow, 4, wxString::FromUTF8(reservation.statut));
         }
     };
 
@@ -520,8 +527,8 @@ void MaFrame::InitReservationsTab() {
         // Statut
         mainSizer->Add(new wxStaticText(&addDialog, wxID_ANY, "Statut:"), 0, wxALL, 5);
         wxChoice* statutCtrl = new wxChoice(&addDialog, wxID_ANY);
-        statutCtrl->Append("Confirmee");
-        statutCtrl->Append("Annulee");
+        statutCtrl->Append(wxString::FromUTF8("Confirmée"));
+        statutCtrl->Append(wxString::FromUTF8("Annulée"));
         mainSizer->Add(statutCtrl, 0, wxALL | wxEXPAND, 5);
 
         // Boutons OK et Annuler

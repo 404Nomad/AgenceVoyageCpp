@@ -46,8 +46,8 @@ void DatabaseInitializer::initializeDatabase() {
             "trek_id INT NOT NULL, "
             "date_reservation DATE NOT NULL, "
             "statut ENUM('Confirmée', 'Annulée') NOT NULL, "
-            "FOREIGN KEY (client_id) REFERENCES Clients(id) ON DELETE CASCADE ON UPDATE CASCADE, "
-            "FOREIGN KEY (trek_id) REFERENCES Treks(id) ON DELETE CASCADE ON UPDATE CASCADE);"
+            "FOREIGN KEY (client_id) REFERENCES Clients(id) ON DELETE RESTRICT ON UPDATE CASCADE, "
+            "FOREIGN KEY (trek_id) REFERENCES Treks(id) ON DELETE RESTRICT ON UPDATE CASCADE);"
         );
 
         // Insert fixtures for Clients
