@@ -276,5 +276,7 @@ CMakeFiles/wxApp.dir/src/Reservation.cpp.o: \
  /usr/include/cppconn/statement.h /usr/include/cppconn/config.h \
  /usr/include/inttypes.h /usr/include/cppconn/resultset.h \
  /usr/include/cppconn/resultset_metadata.h \
- /usr/include/cppconn/datatype.h /usr/include/cppconn/resultset.h \
+ /usr/include/cppconn/datatype.h \
+ /usr/include/cppconn/prepared_statement.h \
+ /usr/include/cppconn/statement.h /usr/include/cppconn/resultset.h \
  /usr/include/cppconn/exception.h

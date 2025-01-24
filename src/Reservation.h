@@ -21,6 +21,8 @@ public:
     // Ajoute une nouvelle réservation
     static void addReservation(const Reservation& reservation);
 
+    static void updateReservationStatus(int reservationId, const std::string& newStatus);
+
     // Supprime une réservation par son ID
     static void deleteReservation(int reservationId);
 };

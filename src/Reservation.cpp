@@ -2,6 +2,7 @@
 #include <mysql_driver.h>
 #include <mysql_connection.h>
 #include <cppconn/statement.h>
+#include <cppconn/prepared_statement.h>
 #include <cppconn/resultset.h>
 #include <cppconn/exception.h>
 #include <stdexcept>
@@ -57,6 +58,28 @@ void ReservationManager::addReservation(const Reservation& reservation) {
         std::cerr << "Erreur SQL (addReservation): " << e.what() << std::endl;
     }
 }
+
+// Met à jour le statut d'une réservation
+void ReservationManager::updateReservationStatus(int reservationId, const std::string& newStatus) {
+    try {
+        sql::mysql::MySQL_Driver* driver = sql::mysql::get_mysql_driver_instance();
+        auto con = std::unique_ptr<sql::Connection>(driver->connect("tcp://127.0.0.1:3310", "cppuser", "mycpp"));
+        con->setSchema("agencesqlctn");
+
+        auto pstmt = std::unique_ptr<sql::PreparedStatement>(
+            con->prepareStatement("UPDATE Reservations SET statut = ? WHERE id = ?")
+        );
+        pstmt->setString(1, newStatus);
+        pstmt->setInt(2, reservationId);
+
+        pstmt->executeUpdate();
+        std::cout << "Réservation ID " << reservationId << " mise à jour avec le statut : " << newStatus << std::endl;
+    } catch (const sql::SQLException& e) {
+        std::cerr << "Erreur SQL (updateReservationStatus): " << e.what() << std::endl;
+        throw;
+    }
+}
+
 
 // Supprime une réservation
 void ReservationManager::deleteReservation(int reservationId) {

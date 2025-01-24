@@ -465,8 +465,9 @@ void MaFrame::InitReservationsTab() {
     wxPanel* panel = new wxPanel(m_notebook, wxID_ANY);
 
     wxButton* addReservationButton = new wxButton(panel, wxID_ANY, "Ajouter Reservation", wxPoint(10, 10));
-    wxButton* listReservationsButton = new wxButton(panel, wxID_ANY, "Lister Reservations", wxPoint(190, 10));
-    wxButton* deleteReservationButton = new wxButton(panel, wxID_ANY, "Supprimer Reservation", wxPoint(370, 10));
+    wxButton* listReservationsButton = new wxButton(panel, wxID_ANY, "Rafraichir Page", wxPoint(190, 10));
+    wxButton* deleteReservationButton = new wxButton(panel, wxID_ANY, "Supprimer Reservation", wxPoint(340, 10));
+    wxButton* cancelReservationButton = new wxButton(panel, wxID_ANY, "Annuler Reservation", wxPoint(540, 10));
 
     wxGrid* reservationGrid = new wxGrid(panel, wxID_ANY, wxPoint(10, 50), wxSize(973, 512));
     reservationGrid->CreateGrid(0, 5);
@@ -475,6 +476,8 @@ void MaFrame::InitReservationsTab() {
     reservationGrid->SetColLabelValue(2, "Trek");
     reservationGrid->SetColLabelValue(3, "Date");
     reservationGrid->SetColLabelValue(4, wxString::FromUTF8("Statut"));
+
+    //reservationGrid->EnableEditing(true); // Activer l'édition des cellules
 
     // Rafraîchir la grille des réservations
     auto refreshReservationGrid = [reservationGrid]() {
@@ -570,6 +573,36 @@ void MaFrame::InitReservationsTab() {
             wxMessageBox("Reservation ajoutee avec succes !", "Succès", wxOK | wxICON_INFORMATION);
 
             refreshReservationGrid();
+        }
+    });
+
+    // Gestionnaire pour annuler une réservation
+    cancelReservationButton->Bind(wxEVT_BUTTON, [this, reservationGrid, refreshReservationGrid](wxCommandEvent&) {
+        int selectedRow = reservationGrid->GetGridCursorRow();
+        if (selectedRow != wxNOT_FOUND) {
+            int reservationId = std::stoi(reservationGrid->GetCellValue(selectedRow, 0).ToStdString());
+            std::string currentStatus = reservationGrid->GetCellValue(selectedRow, 4).ToStdString();
+
+            // Vérifier si la réservation est déjà annulée
+            if (currentStatus == "Annulee") {
+                wxMessageBox(wxString::FromUTF8("Cette réservation est déjà annulée."),
+                             "Information", wxOK | wxICON_INFORMATION);
+                return;
+            }
+
+            // Mise à jour du statut
+            try {
+                ReservationManager::updateReservationStatus(reservationId, "Annulee");
+                wxMessageBox(wxString::FromUTF8("La réservation a été annulée avec succès."),
+                             "Succès", wxOK | wxICON_INFORMATION);
+                refreshReservationGrid();
+            } catch (...) {
+                wxMessageBox(wxString::FromUTF8("Erreur lors de l'annulation de la réservation."),
+                             "Erreur", wxOK | wxICON_ERROR);
+            }
+        } else {
+            wxMessageBox(wxString::FromUTF8("Veuillez sélectionner une réservation à annuler."),
+                         "Erreur", wxOK | wxICON_WARNING);
         }
     });
 
