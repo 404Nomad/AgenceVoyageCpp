@@ -527,8 +527,8 @@ void MaFrame::InitReservationsTab() {
         // Statut
         mainSizer->Add(new wxStaticText(&addDialog, wxID_ANY, "Statut:"), 0, wxALL, 5);
         wxChoice* statutCtrl = new wxChoice(&addDialog, wxID_ANY);
-        statutCtrl->Append(wxString::FromUTF8("Confirmée"));
-        statutCtrl->Append(wxString::FromUTF8("Annulée"));
+        statutCtrl->Append("Confirmee");
+        statutCtrl->Append("Annulee");
         mainSizer->Add(statutCtrl, 0, wxALL | wxEXPAND, 5);
 
         // Boutons OK et Annuler

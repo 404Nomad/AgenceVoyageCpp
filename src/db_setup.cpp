@@ -45,9 +45,9 @@ void DatabaseInitializer::initializeDatabase() {
             "client_id INT NOT NULL, "
             "trek_id INT NOT NULL, "
             "date_reservation DATE NOT NULL, "
-            "statut ENUM('Confirmée', 'Annulée') NOT NULL, "
-            "FOREIGN KEY (client_id) REFERENCES Clients(id) ON DELETE RESTRICT ON UPDATE CASCADE, "
-            "FOREIGN KEY (trek_id) REFERENCES Treks(id) ON DELETE RESTRICT ON UPDATE CASCADE);"
+            "statut ENUM('Confirmee', 'Annulee') NOT NULL, "
+            "FOREIGN KEY (client_id) REFERENCES Clients(id) ON DELETE CASCADE ON UPDATE CASCADE, "
+            "FOREIGN KEY (trek_id) REFERENCES Treks(id) ON DELETE CASCADE ON UPDATE CASCADE);"
         );
 
         // Insert fixtures for Clients
@@ -67,8 +67,8 @@ void DatabaseInitializer::initializeDatabase() {
         // Insert fixtures for Reservations
         stmt->execute(
             "INSERT IGNORE INTO Reservations(client_id, trek_id, date_reservation, statut) VALUES "
-            "(1, 1, '2023-03-01', 'Confirmée'),"
-            "(2, 2, '2023-03-05', 'Annulée');"
+            "(1, 1, '2023-03-01', 'Confirmee'),"
+            "(2, 2, '2023-03-05', 'Annulee');"
         );
 
         // Affichage des données de la table Clients
