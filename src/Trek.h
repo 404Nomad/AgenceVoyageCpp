@@ -28,6 +28,9 @@ public:
 
     // Supprime un trek par son ID
     static void deleteTrek(int trekId);
+
+    // Recherche des treks par filtre
+    static std::vector<Trek> searchTreks(const std::string& filter);
 };
 
 #endif // TREK_H

@@ -88,3 +88,37 @@ void ClientManager::deleteClient(int clientId) {
         std::cerr << "Erreur SQL (deleteClient) : " << e.what() << std::endl;
     }
 }
+
+std::vector<Client> ClientManager::searchClients(const std::string& filter) {
+    std::vector<Client> clients;
+
+    try {
+        sql::mysql::MySQL_Driver* driver = sql::mysql::get_mysql_driver_instance();
+        auto con = std::unique_ptr<sql::Connection>(driver->connect("tcp://127.0.0.1:3310", "cppuser", "mycpp"));
+        con->setSchema("agencesqlctn");
+
+        auto stmt = std::unique_ptr<sql::Statement>(con->createStatement());
+        auto res = std::unique_ptr<sql::ResultSet>(stmt->executeQuery(
+            "SELECT * FROM Clients WHERE nom LIKE '%" + filter + 
+            "%' OR prenom LIKE '%" + filter + 
+            "%' OR email LIKE '%" + filter + 
+            "%' OR telephone LIKE '%" + filter + "%';"
+        ));
+
+        while (res->next()) {
+            Client client;
+            client.id = res->getInt("id");
+            client.nom = res->getString("nom");
+            client.prenom = res->getString("prenom");
+            client.email = res->getString("email");
+            client.telephone = res->getString("telephone");
+            client.date_inscription = res->getString("date_inscription");
+            clients.push_back(client);
+        }
+    } catch (const sql::SQLException& e) {
+        std::cerr << "Erreur SQL (searchClients) : " << e.what() << std::endl;
+    }
+
+    return clients;
+}
+

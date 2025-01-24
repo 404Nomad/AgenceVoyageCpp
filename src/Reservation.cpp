@@ -94,3 +94,37 @@ void ReservationManager::deleteReservation(int reservationId) {
         std::cerr << "Erreur SQL (deleteReservation): " << e.what() << std::endl;
     }
 }
+
+// Filtre les réservations par client_id
+std::vector<Reservation> ReservationManager::searchReservationsByClientId(int clientId) {
+    std::vector<Reservation> reservations;
+
+    try {
+        sql::mysql::MySQL_Driver* driver = sql::mysql::get_mysql_driver_instance();
+        auto con = std::unique_ptr<sql::Connection>(driver->connect("tcp://127.0.0.1:3310", "cppuser", "mycpp"));
+        con->setSchema("agencesqlctn");
+
+        auto pstmt = std::unique_ptr<sql::PreparedStatement>(
+            con->prepareStatement("SELECT r.id, r.client_id, r.trek_id, r.date_reservation, r.statut "
+                                  "FROM Reservations r WHERE r.client_id = ?;")
+        );
+        pstmt->setInt(1, clientId);
+
+        auto res = std::unique_ptr<sql::ResultSet>(pstmt->executeQuery());
+
+        while (res->next()) {
+            Reservation reservation;
+            reservation.id = res->getInt("id");
+            reservation.clientId = res->getInt("client_id");
+            reservation.trekId = res->getInt("trek_id");
+            reservation.dateReservation = res->getString("date_reservation");
+            reservation.statut = res->getString("statut");
+            reservations.push_back(reservation);
+        }
+    } catch (const sql::SQLException& e) {
+        std::cerr << "Erreur SQL (searchReservationsByClientId): " << e.what() << std::endl;
+    }
+
+    return reservations;
+}
+

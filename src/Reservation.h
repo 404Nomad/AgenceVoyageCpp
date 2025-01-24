@@ -25,6 +25,9 @@ public:
 
     // Supprime une réservation par son ID
     static void deleteReservation(int reservationId);
+
+    // Recherche une réservation par son ID
+    static std::vector<Reservation> searchReservationsByClientId(int ClientId);
 };
 
 #endif // RESERVATION_H

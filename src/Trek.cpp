@@ -104,3 +104,38 @@ void TrekManager::deleteTrek(int trekId) {
         throw;
     }
 }
+
+std::vector<Trek> TrekManager::searchTreks(const std::string& filter) {
+    std::vector<Trek> treks;
+
+    try {
+        sql::mysql::MySQL_Driver* driver = sql::mysql::get_mysql_driver_instance();
+        auto con = std::unique_ptr<sql::Connection>(driver->connect("tcp://127.0.0.1:3310", "cppuser", "mycpp"));
+        con->setSchema("agencesqlctn");
+
+        auto stmt = std::unique_ptr<sql::Statement>(con->createStatement());
+        auto res = std::unique_ptr<sql::ResultSet>(stmt->executeQuery(
+            "SELECT * FROM Treks WHERE "
+            "nom LIKE '%" + filter + "%' OR "
+            "lieu LIKE '%" + filter + "%' OR "
+            "prix LIKE '%" + filter + "%' OR "
+            "niveau_difficulte LIKE '%" + filter + "%';"
+        ));
+
+        while (res->next()) {
+            Trek trek;
+            trek.id = res->getInt("id");
+            trek.nom = res->getString("nom");
+            trek.lieu = res->getString("lieu");
+            trek.duree = res->getInt("duree");
+            trek.prix = res->getDouble("prix");
+            trek.niveau_difficulte = res->getString("niveau_difficulte");
+            trek.description = res->getString("description");
+            treks.push_back(trek);
+        }
+    } catch (const sql::SQLException& e) {
+        std::cerr << "Erreur SQL (searchTreks) : " << e.what() << std::endl;
+    }
+
+    return treks;
+}

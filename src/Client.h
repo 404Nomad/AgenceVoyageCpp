@@ -19,6 +19,7 @@ public:
     static void addClient(const Client& client);
     static void updateClient(const Client& client);
     static void deleteClient(int clientId);
+    static std::vector<Client> searchClients(const std::string& filter);
 };
 
 #endif // CLIENT_H

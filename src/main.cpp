@@ -98,9 +98,15 @@ void MaFrame::InitClientsTab() {
     wxButton* addButton = new wxButton(panel, wxID_ANY, "Ajouter Client", wxPoint(10, 10));
     wxButton* editButton = new wxButton(panel, wxID_ANY, "Modifier Client", wxPoint(150, 10));
     wxButton* deleteButton = new wxButton(panel, wxID_ANY, "Supprimer Client", wxPoint(300, 10));
-    wxButton* listButton = new wxButton(panel, wxID_ANY, "Lister Clients", wxPoint(460, 10));
+    wxButton* listButton = new wxButton(panel, wxID_ANY, "Rafraichir Liste", wxPoint(460, 10));
 
-    wxGrid* clientGrid = new wxGrid(panel, wxID_ANY, wxPoint(10, 50), wxSize(973, 512));
+    wxTextCtrl* searchCtrl = new wxTextCtrl(panel, wxID_ANY, "", wxPoint(10, 50), wxSize(200, 35), wxTE_PROCESS_ENTER);
+    searchCtrl->SetHint("Rechercher un client..."); // Ajouter un placeholder (grisé)
+    wxButton* searchButton = new wxButton(panel, wxID_ANY, "Rechercher", wxPoint(220, 50));
+
+
+
+    wxGrid* clientGrid = new wxGrid(panel, wxID_ANY, wxPoint(10, 90), wxSize(973, 512));
     clientGrid->CreateGrid(0, 6);
     clientGrid->SetColLabelValue(0, "ID");
     clientGrid->SetColLabelValue(1, "Nom");
@@ -122,8 +128,13 @@ void MaFrame::InitClientsTab() {
     clientGrid->SetDefaultRowSize(30, true);
 
     // Fonction pour rafraîchir la grille des clients
-    auto refreshClientGrid = [clientGrid]() {
-        std::vector<Client> clients = ClientManager::listClients();
+    auto refreshClientGrid = [clientGrid](const std::string& filter = "") {
+        std::vector<Client> clients;
+        if (filter.empty()) {
+            clients = ClientManager::listClients();
+        } else {
+            clients = ClientManager::searchClients(filter);
+        }
         clientGrid->ClearGrid();
         if (clientGrid->GetNumberRows() > 0) {
             clientGrid->DeleteRows(0, clientGrid->GetNumberRows());
@@ -139,6 +150,18 @@ void MaFrame::InitClientsTab() {
             clientGrid->SetCellValue(lastRow, 5, client.date_inscription);
         }
     };
+
+    // Lier le bouton de recherche
+    searchButton->Bind(wxEVT_BUTTON, [searchCtrl, refreshClientGrid](wxCommandEvent&) {
+        std::string filter = searchCtrl->GetValue().ToStdString();
+        refreshClientGrid(filter);
+    });
+
+    // Lier la touche "Entrée" dans la barre de recherche
+    searchCtrl->Bind(wxEVT_TEXT_ENTER, [searchCtrl, refreshClientGrid](wxCommandEvent&) {
+        std::string filter = searchCtrl->GetValue().ToStdString();
+        refreshClientGrid(filter);
+    });
 
     // Charger les données au chargement de l'onglet
     refreshClientGrid();
@@ -222,10 +245,15 @@ void MaFrame::InitTreksTab() {
     wxButton* addTrekButton = new wxButton(panel, wxID_ANY, "Ajouter Trek", wxPoint(10, 10));
     wxButton* editTrekButton = new wxButton(panel, wxID_ANY, "Modifier Trek", wxPoint(150, 10));
     wxButton* deleteTrekButton = new wxButton(panel, wxID_ANY, "Supprimer Trek", wxPoint(300, 10));
-    wxButton* listTreksButton = new wxButton(panel, wxID_ANY, "Lister Treks", wxPoint(460, 10));
+    wxButton* listTreksButton = new wxButton(panel, wxID_ANY, "Rafraichir Liste", wxPoint(460, 10));
+
+    wxTextCtrl* searchCtrl = new wxTextCtrl(panel, wxID_ANY, "", wxPoint(10, 50), wxSize(200, 35), wxTE_PROCESS_ENTER);
+    searchCtrl->SetHint("Rechercher un trek..."); // Ajouter un placeholder (grisé)
+    wxButton* searchButton = new wxButton(panel, wxID_ANY, "Rechercher", wxPoint(220, 50));
+
 
     // Grille pour afficher les treks
-    wxGrid* trekGrid = new wxGrid(panel, wxID_ANY, wxPoint(10, 50), wxSize(973, 512));
+    wxGrid* trekGrid = new wxGrid(panel, wxID_ANY, wxPoint(10, 90), wxSize(973, 512));
     trekGrid->CreateGrid(0, 7);
     trekGrid->SetColLabelValue(0, "ID");
     trekGrid->SetColLabelValue(1, "Nom");
@@ -248,8 +276,13 @@ void MaFrame::InitTreksTab() {
     trekGrid->SetDefaultRowSize(30, true);
 
     // Fonction pour rafraîchir la grille des treks
-    auto refreshTrekGrid = [trekGrid]() {
+    auto refreshTrekGrid = [trekGrid](const std::string& filter = "") {
         std::vector<Trek> treks = TrekManager::listTreks();
+        if (filter.empty()) {
+            treks = TrekManager::listTreks();
+        } else {
+            treks = TrekManager::searchTreks(filter);
+        }
         trekGrid->ClearGrid();
         if (trekGrid->GetNumberRows() > 0) {
             trekGrid->DeleteRows(0, trekGrid->GetNumberRows());
@@ -266,6 +299,18 @@ void MaFrame::InitTreksTab() {
             trekGrid->SetCellValue(lastRow, 6, trek.description);
         }
     };
+
+    // Lier le bouton de recherche
+    searchButton->Bind(wxEVT_BUTTON, [searchCtrl, refreshTrekGrid](wxCommandEvent&) {
+        std::string filter = searchCtrl->GetValue().ToStdString();
+        refreshTrekGrid(filter);
+    });
+
+    // Lier la touche "Entrée" dans la barre de recherche
+    searchCtrl->Bind(wxEVT_TEXT_ENTER, [searchCtrl, refreshTrekGrid](wxCommandEvent&) {
+        std::string filter = searchCtrl->GetValue().ToStdString();
+        refreshTrekGrid(filter);
+    });
 
     // Charger les treks lors de l'ouverture de l'onglet
     refreshTrekGrid();
@@ -469,7 +514,12 @@ void MaFrame::InitReservationsTab() {
     wxButton* deleteReservationButton = new wxButton(panel, wxID_ANY, "Supprimer Reservation", wxPoint(340, 10));
     wxButton* cancelReservationButton = new wxButton(panel, wxID_ANY, "Annuler Reservation", wxPoint(540, 10));
 
-    wxGrid* reservationGrid = new wxGrid(panel, wxID_ANY, wxPoint(10, 50), wxSize(973, 512));
+    wxTextCtrl* searchCtrl = new wxTextCtrl(panel, wxID_ANY, "", wxPoint(10, 50), wxSize(270, 35), wxTE_PROCESS_ENTER);
+    searchCtrl->SetHint("Entrer l'id du Client pour rechercher..."); // Placeholder
+    wxButton* searchButton = new wxButton(panel, wxID_ANY, "Rechercher", wxPoint(290, 50));
+
+
+    wxGrid* reservationGrid = new wxGrid(panel, wxID_ANY, wxPoint(10, 90), wxSize(973, 512));
     reservationGrid->CreateGrid(0, 5);
     reservationGrid->SetColLabelValue(0, "ID");
     reservationGrid->SetColLabelValue(1, "Client");
@@ -479,9 +529,27 @@ void MaFrame::InitReservationsTab() {
 
     //reservationGrid->EnableEditing(true); // Activer l'édition des cellules
 
-    // Rafraîchir la grille des réservations
-    auto refreshReservationGrid = [reservationGrid]() {
-        std::vector<Reservation> reservations = ReservationManager::listReservations();
+    // Ajuster la taille des colonnes
+    reservationGrid->SetColSize(0, 50);  // ID
+    reservationGrid->SetColSize(1, 100); // Client ID
+    reservationGrid->SetColSize(2, 100); // Trek ID
+    reservationGrid->SetColSize(3, 220); // Date Réservation
+    reservationGrid->SetColSize(4, 150); // Statut
+
+    reservationGrid->SetDefaultRowSize(30, true);
+
+    // Fonction pour rafraîchir la grille des réservations
+    auto refreshReservationGrid = [reservationGrid](int clientId = -1) {
+        std::vector<Reservation> reservations;
+
+        if (clientId == -1) {
+            // Liste toutes les réservations
+            reservations = ReservationManager::listReservations();
+        } else {
+            // Filtre par client_id
+            reservations = ReservationManager::searchReservationsByClientId(clientId);
+        }
+
         reservationGrid->ClearGrid();
         if (reservationGrid->GetNumberRows() > 0) {
             reservationGrid->DeleteRows(0, reservationGrid->GetNumberRows());
@@ -493,9 +561,32 @@ void MaFrame::InitReservationsTab() {
             reservationGrid->SetCellValue(lastRow, 1, std::to_string(reservation.clientId));
             reservationGrid->SetCellValue(lastRow, 2, std::to_string(reservation.trekId));
             reservationGrid->SetCellValue(lastRow, 3, reservation.dateReservation);
-            reservationGrid->SetCellValue(lastRow, 4, wxString::FromUTF8(reservation.statut));
+            reservationGrid->SetCellValue(lastRow, 4, reservation.statut);
         }
     };
+
+
+    // Lier le bouton de recherche pour filtrer les réservations par client_id
+    searchButton->Bind(wxEVT_BUTTON, [searchCtrl, refreshReservationGrid](wxCommandEvent&) {
+        std::string input = searchCtrl->GetValue().ToStdString();
+        try {
+            int clientId = std::stoi(input); // Convertir l'entrée en entier
+            refreshReservationGrid(clientId); // Appel avec un client_id spécifique
+        } catch (const std::invalid_argument&) {
+            wxMessageBox("Veuillez entrer un ID client valide.", "Erreur", wxOK | wxICON_ERROR);
+        }
+    });
+
+    // Gérer l'événement pour la touche "Entrée" dans le champ de recherche
+    searchCtrl->Bind(wxEVT_TEXT_ENTER, [searchCtrl, refreshReservationGrid](wxCommandEvent&) {
+        std::string input = searchCtrl->GetValue().ToStdString();
+        try {
+            int clientId = std::stoi(input); // Convertir l'entrée en entier
+            refreshReservationGrid(clientId); // Appel avec un client_id spécifique
+        } catch (const std::invalid_argument&) {
+            wxMessageBox("Veuillez entrer un ID client valide.", "Erreur", wxOK | wxICON_ERROR);
+        }
+    });
 
     // Automatisation du chargement des données
     refreshReservationGrid();
