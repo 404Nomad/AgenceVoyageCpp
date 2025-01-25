@@ -1,8 +1,10 @@
-CMakeFiles/wxApp.dir/src/main.cpp.o: \
- /home/major/Documents/AgenceVoyageCpp/src/main.cpp \
- /usr/include/stdc-predef.h /usr/include/wx-3.2/wx/wx.h \
- /usr/include/wx-3.2/wx/defs.h /usr/include/wx-3.2/wx/platform.h \
- /usr/include/wx-3.2/wx/compiler.h \
+CMakeFiles/wxApp.dir/src/tabs/ReservationsTab.cpp.o: \
+ /home/major/Documents/AgenceVoyageCpp/src/tabs/ReservationsTab.cpp \
+ /usr/include/stdc-predef.h \
+ /home/major/Documents/AgenceVoyageCpp/src/tabs/ReservationsTab.h \
+ /home/major/Documents/AgenceVoyageCpp/src/tabs/../MaFrame.h \
+ /usr/include/wx-3.2/wx/wx.h /usr/include/wx-3.2/wx/defs.h \
+ /usr/include/wx-3.2/wx/platform.h /usr/include/wx-3.2/wx/compiler.h \
  /usr/lib/x86_64-linux-gnu/wx/include/gtk3-unicode-3.2/wx/setup.h \
  /usr/include/wx-3.2/wx/chkconf.h /usr/include/wx-3.2/wx/gtk/chkconf.h \
  /usr/include/wx-3.2/wx/unix/chkconf.h /usr/include/wx-3.2/wx/version.h \
@@ -389,9 +391,13 @@ CMakeFiles/wxApp.dir/src/main.cpp.o: \
  /usr/include/wx-3.2/wx/gtk/filedlg.h \
  /usr/include/wx-3.2/wx/gtk/filectrl.h /usr/include/wx-3.2/wx/filectrl.h \
  /usr/include/wx-3.2/wx/mdi.h /usr/include/wx-3.2/wx/gtk/mdi.h \
- /home/major/Documents/AgenceVoyageCpp/src/MaFrame.h \
  /usr/include/wx-3.2/wx/notebook.h /usr/include/wx-3.2/wx/bookctrl.h \
  /usr/include/wx-3.2/wx/withimages.h /usr/include/wx-3.2/wx/imaglist.h \
  /usr/include/wx-3.2/wx/generic/imaglist.h \
- /usr/include/wx-3.2/wx/gtk/notebook.h \
- /home/major/Documents/AgenceVoyageCpp/src/db_setup.h
+ /usr/include/wx-3.2/wx/gtk/notebook.h /usr/include/wx-3.2/wx/grid.h \
+ /usr/include/wx-3.2/wx/generic/grid.h \
+ /usr/include/wx-3.2/wx/generic/grideditors.h \
+ /usr/include/wx-3.2/wx/generic/gridctrl.h \
+ /home/major/Documents/AgenceVoyageCpp/src/tabs/../Reservation.h \
+ /home/major/Documents/AgenceVoyageCpp/src/tabs/../Client.h \
+ /home/major/Documents/AgenceVoyageCpp/src/tabs/../Trek.h

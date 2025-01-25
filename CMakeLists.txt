@@ -23,21 +23,34 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 
 add_definitions(-DPROJECT_ROOT_DIR="${CMAKE_SOURCE_DIR}")
 
-
 # Définir les fichiers sources
 set(SOURCES 
-    src/main.cpp 
-    src/Client.cpp 
+    src/main.cpp
+    src/MaFrame.cpp
+    
+    # Onglets
+    src/tabs/ClientsTab.cpp
+    src/tabs/TreksTab.cpp
+    src/tabs/ReservationsTab.cpp
+    
+    # Entités & gestionnaires
+    src/Client.cpp
     src/Trek.cpp
     src/Reservation.cpp
+    
+    # Dialogs
+    src/Client/ClientAddDialog.cpp
     src/Client/ClientEditDialog.cpp
+    
+    # Autres
     src/ButtonCellRenderer.cpp
-    src/db_setup.cpp)
+    src/db_setup.cpp
+)
 
 # Inclure les répertoires des fichiers d'en-tête
 include_directories(src)
 
-# Ajouter l'exécutable
+# Créer l'exécutable
 add_executable(wxApp ${SOURCES})
 
 # Lier les bibliothèques nécessaires
@@ -46,4 +59,5 @@ target_link_libraries(wxApp
     ${MYSQL_LIB} 
     cpprest 
     ssl 
-    crypto)
+    crypto
+)

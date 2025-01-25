@@ -177,6 +177,30 @@ src/Client.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/Client.cpp.s
 .PHONY : src/Client.cpp.s
 
+src/Client/ClientAddDialog.o: src/Client/ClientAddDialog.cpp.o
+.PHONY : src/Client/ClientAddDialog.o
+
+# target to build an object file
+src/Client/ClientAddDialog.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/Client/ClientAddDialog.cpp.o
+.PHONY : src/Client/ClientAddDialog.cpp.o
+
+src/Client/ClientAddDialog.i: src/Client/ClientAddDialog.cpp.i
+.PHONY : src/Client/ClientAddDialog.i
+
+# target to preprocess a source file
+src/Client/ClientAddDialog.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/Client/ClientAddDialog.cpp.i
+.PHONY : src/Client/ClientAddDialog.cpp.i
+
+src/Client/ClientAddDialog.s: src/Client/ClientAddDialog.cpp.s
+.PHONY : src/Client/ClientAddDialog.s
+
+# target to generate assembly for a file
+src/Client/ClientAddDialog.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/Client/ClientAddDialog.cpp.s
+.PHONY : src/Client/ClientAddDialog.cpp.s
+
 src/Client/ClientEditDialog.o: src/Client/ClientEditDialog.cpp.o
 .PHONY : src/Client/ClientEditDialog.o
 
@@ -200,6 +224,30 @@ src/Client/ClientEditDialog.s: src/Client/ClientEditDialog.cpp.s
 src/Client/ClientEditDialog.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/Client/ClientEditDialog.cpp.s
 .PHONY : src/Client/ClientEditDialog.cpp.s
+
+src/MaFrame.o: src/MaFrame.cpp.o
+.PHONY : src/MaFrame.o
+
+# target to build an object file
+src/MaFrame.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/MaFrame.cpp.o
+.PHONY : src/MaFrame.cpp.o
+
+src/MaFrame.i: src/MaFrame.cpp.i
+.PHONY : src/MaFrame.i
+
+# target to preprocess a source file
+src/MaFrame.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/MaFrame.cpp.i
+.PHONY : src/MaFrame.cpp.i
+
+src/MaFrame.s: src/MaFrame.cpp.s
+.PHONY : src/MaFrame.s
+
+# target to generate assembly for a file
+src/MaFrame.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/MaFrame.cpp.s
+.PHONY : src/MaFrame.cpp.s
 
 src/Reservation.o: src/Reservation.cpp.o
 .PHONY : src/Reservation.o
@@ -297,6 +345,78 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/tabs/ClientsTab.o: src/tabs/ClientsTab.cpp.o
+.PHONY : src/tabs/ClientsTab.o
+
+# target to build an object file
+src/tabs/ClientsTab.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/tabs/ClientsTab.cpp.o
+.PHONY : src/tabs/ClientsTab.cpp.o
+
+src/tabs/ClientsTab.i: src/tabs/ClientsTab.cpp.i
+.PHONY : src/tabs/ClientsTab.i
+
+# target to preprocess a source file
+src/tabs/ClientsTab.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/tabs/ClientsTab.cpp.i
+.PHONY : src/tabs/ClientsTab.cpp.i
+
+src/tabs/ClientsTab.s: src/tabs/ClientsTab.cpp.s
+.PHONY : src/tabs/ClientsTab.s
+
+# target to generate assembly for a file
+src/tabs/ClientsTab.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/tabs/ClientsTab.cpp.s
+.PHONY : src/tabs/ClientsTab.cpp.s
+
+src/tabs/ReservationsTab.o: src/tabs/ReservationsTab.cpp.o
+.PHONY : src/tabs/ReservationsTab.o
+
+# target to build an object file
+src/tabs/ReservationsTab.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/tabs/ReservationsTab.cpp.o
+.PHONY : src/tabs/ReservationsTab.cpp.o
+
+src/tabs/ReservationsTab.i: src/tabs/ReservationsTab.cpp.i
+.PHONY : src/tabs/ReservationsTab.i
+
+# target to preprocess a source file
+src/tabs/ReservationsTab.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/tabs/ReservationsTab.cpp.i
+.PHONY : src/tabs/ReservationsTab.cpp.i
+
+src/tabs/ReservationsTab.s: src/tabs/ReservationsTab.cpp.s
+.PHONY : src/tabs/ReservationsTab.s
+
+# target to generate assembly for a file
+src/tabs/ReservationsTab.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/tabs/ReservationsTab.cpp.s
+.PHONY : src/tabs/ReservationsTab.cpp.s
+
+src/tabs/TreksTab.o: src/tabs/TreksTab.cpp.o
+.PHONY : src/tabs/TreksTab.o
+
+# target to build an object file
+src/tabs/TreksTab.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/tabs/TreksTab.cpp.o
+.PHONY : src/tabs/TreksTab.cpp.o
+
+src/tabs/TreksTab.i: src/tabs/TreksTab.cpp.i
+.PHONY : src/tabs/TreksTab.i
+
+# target to preprocess a source file
+src/tabs/TreksTab.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/tabs/TreksTab.cpp.i
+.PHONY : src/tabs/TreksTab.cpp.i
+
+src/tabs/TreksTab.s: src/tabs/TreksTab.cpp.s
+.PHONY : src/tabs/TreksTab.s
+
+# target to generate assembly for a file
+src/tabs/TreksTab.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/tabs/TreksTab.cpp.s
+.PHONY : src/tabs/TreksTab.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -312,9 +432,15 @@ help:
 	@echo "... src/Client.o"
 	@echo "... src/Client.i"
 	@echo "... src/Client.s"
+	@echo "... src/Client/ClientAddDialog.o"
+	@echo "... src/Client/ClientAddDialog.i"
+	@echo "... src/Client/ClientAddDialog.s"
 	@echo "... src/Client/ClientEditDialog.o"
 	@echo "... src/Client/ClientEditDialog.i"
 	@echo "... src/Client/ClientEditDialog.s"
+	@echo "... src/MaFrame.o"
+	@echo "... src/MaFrame.i"
+	@echo "... src/MaFrame.s"
 	@echo "... src/Reservation.o"
 	@echo "... src/Reservation.i"
 	@echo "... src/Reservation.s"
@@ -327,6 +453,15 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/tabs/ClientsTab.o"
+	@echo "... src/tabs/ClientsTab.i"
+	@echo "... src/tabs/ClientsTab.s"
+	@echo "... src/tabs/ReservationsTab.o"
+	@echo "... src/tabs/ReservationsTab.i"
+	@echo "... src/tabs/ReservationsTab.s"
+	@echo "... src/tabs/TreksTab.o"
+	@echo "... src/tabs/TreksTab.i"
+	@echo "... src/tabs/TreksTab.s"
 .PHONY : help
 
 
