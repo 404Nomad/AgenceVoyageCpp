@@ -82,7 +82,7 @@ Installez les extensions suivantes pour un support complet du développement en 
 Utilisez Docker Compose pour démarrer la base de données MySQL :
 
 ```bash
-docker-compose up --build -d
+docker compose up --build -d
 ```
 
 Vérifiez que le conteneur est opérationnel avec :

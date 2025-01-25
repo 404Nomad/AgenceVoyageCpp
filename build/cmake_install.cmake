@@ -1,4 +1,4 @@
-# Install script for directory: /home/cd2groupea/Documents/AgenceVoyageCpp
+# Install script for directory: /home/major/Documents/AgenceVoyageCpp
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/cd2groupea/Documents/AgenceVoyageCpp/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/major/Documents/AgenceVoyageCpp/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
