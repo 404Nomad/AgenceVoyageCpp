@@ -365,7 +365,11 @@ void MaFrame::InitTreksTab() {
 
                 // Ajouter les données météo
                 sizer->Add(new wxStaticText(detailsDialog, wxID_ANY, "Météo actuelle :"), 0, wxALL, 10);
-                sizer->Add(new wxStaticText(detailsDialog, wxID_ANY, wxString::FromUTF8(weatherDetails)), 0, wxALL, 10);
+                std::istringstream weatherStream(weatherDetails);
+                std::string weatherLine;
+                while (std::getline(weatherStream, weatherLine)) {
+                    sizer->Add(new wxStaticText(detailsDialog, wxID_ANY, wxString::FromUTF8(weatherLine)), 0, wxALL, 5);
+                }
 
 
 

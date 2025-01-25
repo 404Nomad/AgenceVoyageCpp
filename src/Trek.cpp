@@ -13,6 +13,7 @@
 #include <sstream>
 #include "dotenv.h" // Inclure dotenv-cpp
 #include <cstdlib>  // Pour std::getenv()
+#include <iomanip> // pour put_time et strftime
 
 
 // Liste tous les treks 
@@ -154,16 +155,12 @@ bool fileExists(const std::string& filepath) {
 
 std::string TrekManager::getWeatherDetails(const std::string& location) {
     try {
-        // Vérifie si le fichier .env est accessible et charge les variables
         const std::string envPath = std::string(PROJECT_ROOT_DIR) + "/.env";
         if (!fileExists(envPath)) {
             throw std::runtime_error("Fichier .env introuvable ou inaccessible.");
         }
 
-        //Dotenv::load(".env"); // Charge les variables depuis le fichier .env
-        //Dotenv::load(std::string(PROJECT_ROOT_DIR) + "/.env");
         Dotenv::load(envPath);
-        
         const char* apiKey = std::getenv("OPENWEATHER_API_KEY");
         if (!apiKey) {
             throw std::runtime_error("Clé API introuvable dans les variables d'environnement.");
@@ -181,9 +178,60 @@ std::string TrekManager::getWeatherDetails(const std::string& location) {
             auto json = response.extract_json().get();
             if (json.has_field(U("main")) && json.has_field(U("weather"))) {
                 std::ostringstream weatherDetails;
+
+                // Coordonnées
+                if (json.has_field(U("coord"))) {
+                    auto coord = json[U("coord")];
+                    weatherDetails << "Coordonnées: ("
+                                   << coord[U("lat")].as_double() << ", "
+                                   << coord[U("lon")].as_double() << ")\n";
+                }
+
+                // Conditions principales
                 weatherDetails << "Température: " << json[U("main")][U("temp")].as_double() << "°C\n";
-                weatherDetails << "Conditions: " << json[U("weather")][0][U("description")].as_string() << "\n";
+                weatherDetails << "Ressenti: " << json[U("main")][U("feels_like")].as_double() << "°C\n";
+                weatherDetails << "Temp. Min: " << json[U("main")][U("temp_min")].as_double() << "°C\n";
+                weatherDetails << "Temp. Max: " << json[U("main")][U("temp_max")].as_double() << "°C\n";
                 weatherDetails << "Humidité: " << json[U("main")][U("humidity")].as_integer() << "%\n";
+                weatherDetails << "Pression: " << json[U("main")][U("pressure")].as_integer() << " hPa\n";
+
+                // Vent
+                if (json.has_field(U("wind"))) {
+                    auto wind = json[U("wind")];
+                    weatherDetails << "Vent: " << wind[U("speed")].as_double() << " m/s, "
+                                   << wind[U("deg")].as_integer() << "°\n";
+                }
+
+                // Pluie
+                if (json.has_field(U("rain")) && json[U("rain")].has_field(U("1h"))) {
+                    weatherDetails << "Pluie (1h): " << json[U("rain")][U("1h")].as_double() << " mm\n";
+                }
+
+                // Nuages
+                if (json.has_field(U("clouds")) && json[U("clouds")].has_field(U("all"))) {
+                    weatherDetails << "Couverture nuageuse: " << json[U("clouds")][U("all")].as_integer() << "%\n";
+                }
+
+                // Lever et coucher du soleil
+                if (json.has_field(U("sys"))) {
+                    auto sys = json[U("sys")];
+                    auto sunrise = sys[U("sunrise")].as_integer();
+                    auto sunset = sys[U("sunset")].as_integer();
+
+                    auto sunriseTime = std::chrono::system_clock::from_time_t(sunrise);
+                    auto sunsetTime = std::chrono::system_clock::from_time_t(sunset);
+
+                    auto toTimeString = [](std::chrono::system_clock::time_point tp) {
+                        std::time_t tt = std::chrono::system_clock::to_time_t(tp);
+                        std::ostringstream oss;
+                        oss << std::put_time(std::localtime(&tt), "%H:%M:%S");
+                        return oss.str();
+                    };
+
+                    weatherDetails << "Lever du soleil: " << toTimeString(sunriseTime) << "\n";
+                    weatherDetails << "Coucher du soleil: " << toTimeString(sunsetTime) << "\n";
+                }
+
                 return weatherDetails.str();
             } else {
                 return "Erreur : Réponse inattendue de l'API.";
