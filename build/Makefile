@@ -129,6 +129,30 @@ wxApp/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/build
 .PHONY : wxApp/fast
 
+src/ButtonCellRenderer.o: src/ButtonCellRenderer.cpp.o
+.PHONY : src/ButtonCellRenderer.o
+
+# target to build an object file
+src/ButtonCellRenderer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/ButtonCellRenderer.cpp.o
+.PHONY : src/ButtonCellRenderer.cpp.o
+
+src/ButtonCellRenderer.i: src/ButtonCellRenderer.cpp.i
+.PHONY : src/ButtonCellRenderer.i
+
+# target to preprocess a source file
+src/ButtonCellRenderer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/ButtonCellRenderer.cpp.i
+.PHONY : src/ButtonCellRenderer.cpp.i
+
+src/ButtonCellRenderer.s: src/ButtonCellRenderer.cpp.s
+.PHONY : src/ButtonCellRenderer.s
+
+# target to generate assembly for a file
+src/ButtonCellRenderer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wxApp.dir/build.make CMakeFiles/wxApp.dir/src/ButtonCellRenderer.cpp.s
+.PHONY : src/ButtonCellRenderer.cpp.s
+
 src/Client.o: src/Client.cpp.o
 .PHONY : src/Client.o
 
@@ -282,6 +306,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... wxApp"
+	@echo "... src/ButtonCellRenderer.o"
+	@echo "... src/ButtonCellRenderer.i"
+	@echo "... src/ButtonCellRenderer.s"
 	@echo "... src/Client.o"
 	@echo "... src/Client.i"
 	@echo "... src/Client.s"

@@ -9,6 +9,7 @@
 #include "Trek.h"   // Inclure la gestion des treks
 #include "Reservation.h" // Inclure la gestion des reservations
 #include "db_setup.h" // Inclure la gestion de la base de données
+#include "ButtonCellRenderer.h"
 
 class MonApp : public wxApp {
 public:
@@ -52,9 +53,9 @@ bool MonApp::OnInit() {
     return true;
 }
 
-// Resolution : 1024x768
+// Resolution : 1280x1024
 MaFrame::MaFrame(const wxString& title)
-    : wxFrame(nullptr, wxID_ANY, title, wxDefaultPosition, wxSize(1024, 768)) {
+    : wxFrame(nullptr, wxID_ANY, title, wxDefaultPosition, wxSize(1280, 1024)) {
     try {
         // Création de la barre de menu
         wxMenuBar* menuBar = new wxMenuBar();
@@ -91,7 +92,7 @@ void MaFrame::OnAbout(wxCommandEvent& event) {
                  "À propos", wxOK | wxICON_INFORMATION);
 }
 
-// Resolution : 760x400 > 973, 512
+// Resolution : 760x400 > 1024x768
 void MaFrame::InitClientsTab() {
     wxPanel* panel = new wxPanel(m_notebook, wxID_ANY);
 
@@ -106,7 +107,7 @@ void MaFrame::InitClientsTab() {
 
 
 
-    wxGrid* clientGrid = new wxGrid(panel, wxID_ANY, wxPoint(10, 90), wxSize(973, 512));
+    wxGrid* clientGrid = new wxGrid(panel, wxID_ANY, wxPoint(10, 90), wxSize(1260, 800));
     clientGrid->CreateGrid(0, 6);
     clientGrid->SetColLabelValue(0, "ID");
     clientGrid->SetColLabelValue(1, "Nom");
@@ -120,8 +121,8 @@ void MaFrame::InitClientsTab() {
     clientGrid->SetColSize(0, 50);  // ID
     clientGrid->SetColSize(1, 150); // Nom
     clientGrid->SetColSize(2, 150); // Prenom
-    clientGrid->SetColSize(3, 220); // Email
-    clientGrid->SetColSize(4, 100); // Telephone
+    clientGrid->SetColSize(3, 230); // Email
+    clientGrid->SetColSize(4, 110); // Telephone
     clientGrid->SetColSize(5, 120); // Date Inscription
 
     // Ajuster la taille des lignes (optionnel)
@@ -253,8 +254,8 @@ void MaFrame::InitTreksTab() {
 
 
     // Grille pour afficher les treks
-    wxGrid* trekGrid = new wxGrid(panel, wxID_ANY, wxPoint(10, 90), wxSize(973, 512));
-    trekGrid->CreateGrid(0, 7);
+    wxGrid* trekGrid = new wxGrid(panel, wxID_ANY, wxPoint(10, 90), wxSize(1260, 800));
+    trekGrid->CreateGrid(0, 8);
     trekGrid->SetColLabelValue(0, "ID");
     trekGrid->SetColLabelValue(1, "Nom");
     trekGrid->SetColLabelValue(2, "Lieu");
@@ -262,6 +263,7 @@ void MaFrame::InitTreksTab() {
     trekGrid->SetColLabelValue(4, "Prix (EUR)");
     trekGrid->SetColLabelValue(5, "Difficulte");
     trekGrid->SetColLabelValue(6, "Description");
+    trekGrid->SetColLabelValue(7, "Details & Meteo"); // Colonne pour le bouton Détails
 
     // Ajuster la taille des colonnes
     trekGrid->SetColSize(0, 50);  // ID
@@ -271,9 +273,12 @@ void MaFrame::InitTreksTab() {
     trekGrid->SetColSize(4, 110); // Prix
     trekGrid->SetColSize(5, 120); // Niveau Difficulté
     trekGrid->SetColSize(6, 250); // Description
+    trekGrid->SetColSize(7, 150); // Détails
 
     // Ajuster la taille des lignes (optionnel)
     trekGrid->SetDefaultRowSize(30, true);
+
+    trekGrid->SetDefaultCellOverflow(false);
 
     // Fonction pour rafraîchir la grille des treks
     auto refreshTrekGrid = [trekGrid](const std::string& filter = "") {
@@ -297,6 +302,10 @@ void MaFrame::InitTreksTab() {
             trekGrid->SetCellValue(lastRow, 4, std::to_string(trek.prix));
             trekGrid->SetCellValue(lastRow, 5, trek.niveau_difficulte);
             trekGrid->SetCellValue(lastRow, 6, trek.description);
+            trekGrid->SetCellRenderer(lastRow, 7, new ButtonCellRenderer());
+            //trekGrid->SetCellValue(lastRow, 7, "Meteo"); // Texte fixe pour la colonne Détails
+
+            // Appliquer le renderer personnalisé à la colonne Détails & Météo
         }
     };
 
@@ -314,6 +323,70 @@ void MaFrame::InitTreksTab() {
 
     // Charger les treks lors de l'ouverture de l'onglet
     refreshTrekGrid();
+
+   // Gestionnaire pour ouvrir une modale avec des données
+    trekGrid->Bind(wxEVT_GRID_CELL_LEFT_CLICK, [trekGrid,this](wxGridEvent& event) {
+        try {
+
+            // Vérifiez simplement que la colonne cliquée est bien celle des Détails
+            int col = event.GetCol();
+            int row = event.GetRow();
+
+            if (col == 7) { // Colonne Détails
+
+                // Crée une boîte de dialogue pour tester l'affichage
+                wxDialog* detailsDialog = new wxDialog(this, wxID_ANY, "Details du Trek", wxDefaultPosition, wxSize(400, 300));
+                wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+
+                // Récupérer les données de la ligne
+                std::string trekId = trekGrid->GetCellValue(row, 0).ToStdString();
+                std::string nom = trekGrid->GetCellValue(row, 1).ToStdString();
+                std::string lieu = trekGrid->GetCellValue(row, 2).ToStdString();
+                std::string duree = trekGrid->GetCellValue(row, 3).ToStdString();
+                std::string prix = trekGrid->GetCellValue(row, 4).ToStdString();
+                std::string difficulte = trekGrid->GetCellValue(row, 5).ToStdString();
+                std::string description = trekGrid->GetCellValue(row, 6).ToStdString();
+
+                // Afficher les données dans la modale
+                sizer->Add(new wxStaticText(detailsDialog, wxID_ANY, wxString::Format("ID: %s", trekId)), 0, wxALL, 10);
+                sizer->Add(new wxStaticText(detailsDialog, wxID_ANY, wxString::Format("Nom: %s", nom)), 0, wxALL, 10);
+                sizer->Add(new wxStaticText(detailsDialog, wxID_ANY, wxString::Format("Lieu: %s", lieu)), 0, wxALL, 10);
+                sizer->Add(new wxStaticText(detailsDialog, wxID_ANY, wxString::Format("Duree: %s jours", duree)), 0, wxALL, 10);
+                sizer->Add(new wxStaticText(detailsDialog, wxID_ANY, wxString::Format("Prix: %s EUR", prix)), 0, wxALL, 10);
+                sizer->Add(new wxStaticText(detailsDialog, wxID_ANY, wxString::Format("Difficulte: %s", difficulte)), 0, wxALL, 10);
+                sizer->Add(new wxStaticText(detailsDialog, wxID_ANY, wxString::Format("Description: %s", description)), 0, wxALL, 10);
+
+
+                // Ajout de données temporaires pour le test
+                // sizer->Add(new wxStaticText(detailsDialog, wxID_ANY, "ID: 1"), 0, wxALL, 10);
+                // sizer->Add(new wxStaticText(detailsDialog, wxID_ANY, "Nom: Mont Blanc"), 0, wxALL, 10);
+                // sizer->Add(new wxStaticText(detailsDialog, wxID_ANY, "Lieu: Alpes"), 0, wxALL, 10);
+                // sizer->Add(new wxStaticText(detailsDialog, wxID_ANY, "Duree: 5 jours"), 0, wxALL, 10);
+                // sizer->Add(new wxStaticText(detailsDialog, wxID_ANY, "Prix: 500 EUR"), 0, wxALL, 10);
+                // sizer->Add(new wxStaticText(detailsDialog, wxID_ANY, "Difficulte: Moyen"), 0, wxALL, 10);
+                // sizer->Add(new wxStaticText(detailsDialog, wxID_ANY, "Description: Une aventure alpine incroyable !"), 0, wxALL, 10);
+
+                // Bouton pour fermer la boîte de dialogue
+                wxButton* closeButton = new wxButton(detailsDialog, wxID_OK, "Fermer");
+                sizer->Add(closeButton, 0, wxALIGN_CENTER | wxALL, 10);
+
+                // Configurer et afficher la boîte de dialogue
+                detailsDialog->SetSizer(sizer);
+                detailsDialog->Layout();
+                detailsDialog->ShowModal();
+
+                // Nettoyer la boîte de dialogue après fermeture
+                detailsDialog->Destroy();
+            }
+        } catch (const std::exception& e) {
+            wxMessageBox(wxString::Format("Erreur : %s", e.what()), "Erreur", wxOK | wxICON_ERROR);
+        } catch (...) {
+            wxMessageBox("Une erreur inconnue est survenue.", "Erreur", wxOK | wxICON_ERROR);
+        }
+    });
+
+
+
 
     // Lier les événements
     addTrekButton->Bind(wxEVT_BUTTON, [this, trekGrid, refreshTrekGrid](wxCommandEvent&) {
@@ -496,8 +569,6 @@ void MaFrame::InitTreksTab() {
         }
     });
 
-
-
     listTreksButton->Bind(wxEVT_BUTTON, [refreshTrekGrid](wxCommandEvent&) {
         refreshTrekGrid();
     });
@@ -519,7 +590,7 @@ void MaFrame::InitReservationsTab() {
     wxButton* searchButton = new wxButton(panel, wxID_ANY, "Rechercher", wxPoint(290, 50));
 
 
-    wxGrid* reservationGrid = new wxGrid(panel, wxID_ANY, wxPoint(10, 90), wxSize(973, 512));
+    wxGrid* reservationGrid = new wxGrid(panel, wxID_ANY, wxPoint(10, 90), wxSize(1260, 800));
     reservationGrid->CreateGrid(0, 5);
     reservationGrid->SetColLabelValue(0, "ID");
     reservationGrid->SetColLabelValue(1, "Client");

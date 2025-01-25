@@ -1,4 +1,7 @@
 #include "Trek.h"
+#include <cpprest/http_client.h>
+#include <cpprest/uri.h>
+#include <cpprest/json.h>
 #include <mysql_driver.h>
 #include <mysql_connection.h>
 #include <cppconn/statement.h>
@@ -7,6 +10,7 @@
 #include <stdexcept>
 #include <memory>
 #include <iostream>
+#include <sstream>
 
 // Liste tous les treks 
 std::vector<Trek> TrekManager::listTreks() {
@@ -139,3 +143,35 @@ std::vector<Trek> TrekManager::searchTreks(const std::string& filter) {
 
     return treks;
 }
+
+std::string TrekManager::getWeatherDetails(const std::string& location) {
+    try {
+        web::http::client::http_client client(U("http://api.openweathermap.org/data/2.5/weather"));
+        web::uri_builder builder;
+        builder.append_query(U("q"), location);
+        builder.append_query(U("appid"), U("VOTRE_CLE_API")); // Remplacez par votre clé API OpenWeatherMap
+        builder.append_query(U("units"), U("metric"));
+        builder.append_query(U("lang"), U("fr"));
+
+        auto response = client.request(web::http::methods::GET, builder.to_string()).get();
+        if (response.status_code() == web::http::status_codes::OK) {
+            auto json = response.extract_json().get();
+            if (json.has_field(U("main")) && json.has_field(U("weather"))) {
+                std::ostringstream weatherDetails;
+                weatherDetails << "Température: " << json[U("main")][U("temp")].as_double() << "°C\n";
+                weatherDetails << "Conditions: " << json[U("weather")][0][U("description")].as_string() << "\n";
+                weatherDetails << "Humidité: " << json[U("main")][U("humidity")].as_integer() << "%\n";
+                return weatherDetails.str();
+            } else {
+                return "Erreur : Réponse inattendue de l'API.";
+            }
+        } else {
+            return "Erreur : Code HTTP " + std::to_string(response.status_code());
+        }
+    } catch (const std::exception& e) {
+        return "Erreur lors de la récupération des données météo : " + std::string(e.what());
+    }
+}
+
+
+

@@ -31,6 +31,8 @@ public:
 
     // Recherche des treks par filtre
     static std::vector<Trek> searchTreks(const std::string& filter);
+
+    static std::string getWeatherDetails(const std::string& location); // Nouvelle méthode
 };
 
 #endif // TREK_H
