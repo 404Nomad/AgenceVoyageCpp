@@ -1,15 +1,16 @@
-#include <wx/wx.h>
-#include <wx/frame.h>
-#include <wx/menu.h>
-#include <wx/grid.h>
-#include <wx/notebook.h>
-#include "Client/ClientEditDialog.h"
-#include "Client/ClientAddDialog.cpp"
-#include "Client.h" // Inclure la gestion des clients
-#include "Trek.h"   // Inclure la gestion des treks
-#include "Reservation.h" // Inclure la gestion des reservations
-#include "db_setup.h" // Inclure la gestion de la base de données
-#include "ButtonCellRenderer.h"
+#include <wx/wx.h>                   // Nécessaire pour wxWidgets de base
+#include <wx/frame.h>                // Utilisé pour wxFrame (MaFrame)
+#include <wx/menu.h>                 // Utilisé pour la barre de menu
+#include <wx/grid.h>                 // Utilisé pour wxGrid
+#include <wx/notebook.h>             // Utilisé pour wxNotebook
+#include "Client/ClientEditDialog.h" // Vérifier si ce fichier est réellement utilisé
+#include "Client/ClientAddDialog.cpp" // Inclure un .cpp directement n'est pas recommandé
+#include "Client.h"                  // Nécessaire si des appels à ClientManager sont faits
+#include "Trek.h"                    // Nécessaire si des appels à TrekManager sont faits
+#include "Reservation.h"             // Nécessaire si des appels à ReservationManager sont faits
+#include "db_setup.h"                // Nécessaire pour initialiser la base de données
+#include "ButtonCellRenderer.h"      // Nécessaire pour les boutons personnalisés dans les grilles
+
 
 class MonApp : public wxApp {
 public:
@@ -686,7 +687,8 @@ void MaFrame::InitReservationsTab() {
 
         // Date de réservation
         mainSizer->Add(new wxStaticText(&addDialog, wxID_ANY, "Date de reservation (YYYY-MM-DD):"), 0, wxALL, 5);
-        wxTextCtrl* dateCtrl = new wxTextCtrl(&addDialog, wxID_ANY);
+        //wxTextCtrl* dateCtrl = new wxTextCtrl(&addDialog, wxID_ANY);
+        wxTextCtrl* dateCtrl = new wxTextCtrl(&addDialog, wxID_ANY, getCurrentDate(), wxDefaultPosition, wxSize(350, -1));
         mainSizer->Add(dateCtrl, 0, wxALL | wxEXPAND, 5);
 
         // Statut
