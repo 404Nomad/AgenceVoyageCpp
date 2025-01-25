@@ -67,8 +67,8 @@ void DatabaseInitializer::initializeDatabase() {
         // Insert fixtures for Reservations
         stmt->execute(
             "INSERT IGNORE INTO Reservations(client_id, trek_id, date_reservation, statut) VALUES "
-            "(1, 1, '2023-03-01', 'Confirmee'),"
-            "(2, 2, '2023-03-05', 'Annulee');"
+            "(1, 110, '2023-03-01', 'Confirmee'),"
+            "(2, 111, '2023-03-05', 'Annulee');"
         );
 
         // Affichage des données de la table Clients
