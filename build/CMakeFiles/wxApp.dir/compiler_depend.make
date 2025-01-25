@@ -2708,7 +2708,8 @@ CMakeFiles/wxApp.dir/src/Trek.cpp.o: ../src/Trek.cpp \
   /usr/include/cppconn/resultset_metadata.h \
   /usr/include/cppconn/datatype.h \
   /usr/include/cppconn/resultset.h \
-  /usr/include/cppconn/exception.h
+  /usr/include/cppconn/exception.h \
+  ../src/dotenv.h
 
 CMakeFiles/wxApp.dir/src/db_setup.cpp.o: ../src/db_setup.cpp \
   /usr/include/stdc-predef.h \
@@ -3744,6 +3745,8 @@ CMakeFiles/wxApp.dir/src/main.cpp.o: ../src/main.cpp \
 /usr/include/boost/preprocessor/variadic/size.hpp:
 
 /usr/include/boost/preprocessor/facilities/overload.hpp:
+
+../src/dotenv.h:
 
 /usr/include/boost/preprocessor/tuple/elem.hpp:
 

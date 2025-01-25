@@ -11,6 +11,9 @@
 #include <memory>
 #include <iostream>
 #include <sstream>
+#include "dotenv.h" // Inclure dotenv-cpp
+#include <cstdlib>  // Pour std::getenv()
+
 
 // Liste tous les treks 
 std::vector<Trek> TrekManager::listTreks() {
@@ -144,12 +147,32 @@ std::vector<Trek> TrekManager::searchTreks(const std::string& filter) {
     return treks;
 }
 
+bool fileExists(const std::string& filepath) {
+    struct stat buffer;
+    return (stat(filepath.c_str(), &buffer) == 0);
+}
+
 std::string TrekManager::getWeatherDetails(const std::string& location) {
     try {
+        // Vérifie si le fichier .env est accessible et charge les variables
+        const std::string envPath = std::string(PROJECT_ROOT_DIR) + "/.env";
+        if (!fileExists(envPath)) {
+            throw std::runtime_error("Fichier .env introuvable ou inaccessible.");
+        }
+
+        //Dotenv::load(".env"); // Charge les variables depuis le fichier .env
+        //Dotenv::load(std::string(PROJECT_ROOT_DIR) + "/.env");
+        Dotenv::load(envPath);
+        
+        const char* apiKey = std::getenv("OPENWEATHER_API_KEY");
+        if (!apiKey) {
+            throw std::runtime_error("Clé API introuvable dans les variables d'environnement.");
+        }
+
         web::http::client::http_client client(U("http://api.openweathermap.org/data/2.5/weather"));
         web::uri_builder builder;
         builder.append_query(U("q"), location);
-        builder.append_query(U("appid"), U("VOTRE_CLE_API")); // Remplacez par votre clé API OpenWeatherMap
+        builder.append_query(U("appid"), apiKey);
         builder.append_query(U("units"), U("metric"));
         builder.append_query(U("lang"), U("fr"));
 
@@ -169,7 +192,7 @@ std::string TrekManager::getWeatherDetails(const std::string& location) {
             return "Erreur : Code HTTP " + std::to_string(response.status_code());
         }
     } catch (const std::exception& e) {
-        return "Erreur lors de la récupération des données météo : " + std::string(e.what());
+        return "Erreur récupération météo : " + std::string(e.what());
     }
 }
 

@@ -134,6 +134,9 @@ La conception du projet :
 3. **CMake** :
    - Le fichier `CMakeLists.txt` gère les dépendances et les paramètres de compilation.
 
+4. Ajout de OpenWeather
+5. Ajout de dotenv pour securiser la clé api
+
 ---
 
 ## Utilisation

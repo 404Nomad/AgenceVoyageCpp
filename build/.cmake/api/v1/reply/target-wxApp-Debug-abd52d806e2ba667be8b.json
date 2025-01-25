@@ -12,6 +12,7 @@
 		[
 			"add_executable",
 			"target_link_libraries",
+			"add_definitions",
 			"set_property",
 			"include",
 			"include_directories"
@@ -29,42 +30,54 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 36,
+				"line" : 41,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 39,
+				"line" : 44,
 				"parent" : 0
 			},
 			{
-				"command" : 3,
+				"command" : 2,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 4,
 				"file" : 0,
 				"line" : 11,
 				"parent" : 0
 			},
 			{
 				"file" : 1,
-				"parent" : 3
-			},
-			{
-				"command" : 2,
-				"file" : 1,
-				"line" : 69,
 				"parent" : 4
 			},
 			{
-				"command" : 4,
+				"command" : 3,
+				"file" : 1,
+				"line" : 69,
+				"parent" : 5
+			},
+			{
+				"command" : 5,
 				"file" : 0,
-				"line" : 33,
+				"line" : 22,
 				"parent" : 0
 			},
 			{
-				"command" : 4,
+				"command" : 5,
+				"file" : 0,
+				"line" : 38,
+				"parent" : 0
+			},
+			{
+				"command" : 5,
 				"file" : 1,
 				"line" : 58,
-				"parent" : 4
+				"parent" : 5
 			}
 		]
 	},
@@ -74,7 +87,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : " -pthread"
+					"fragment" : " -pthread -g"
 				},
 				{
 					"fragment" : "-std=gnu++20"
@@ -83,31 +96,39 @@
 			"defines" : 
 			[
 				{
-					"backtrace" : 5,
+					"backtrace" : 3,
+					"define" : "PROJECT_ROOT_DIR=\"/home/major/Documents/AgenceVoyageCpp\""
+				},
+				{
+					"backtrace" : 6,
 					"define" : "WXUSINGDLL"
 				},
 				{
-					"backtrace" : 5,
+					"backtrace" : 6,
 					"define" : "_FILE_OFFSET_BITS=64"
 				},
 				{
-					"backtrace" : 5,
+					"backtrace" : 6,
 					"define" : "__WXGTK__"
 				}
 			],
 			"includes" : 
 			[
 				{
-					"backtrace" : 6,
+					"backtrace" : 7,
+					"path" : "/home/major/Documents/AgenceVoyageCpp/include"
+				},
+				{
+					"backtrace" : 8,
 					"path" : "/home/major/Documents/AgenceVoyageCpp/src"
 				},
 				{
-					"backtrace" : 7,
+					"backtrace" : 9,
 					"isSystem" : true,
 					"path" : "/usr/lib/x86_64-linux-gnu/wx/include/gtk3-unicode-3.2"
 				},
 				{
-					"backtrace" : 7,
+					"backtrace" : 9,
 					"isSystem" : true,
 					"path" : "/usr/include/wx-3.2"
 				}
@@ -139,7 +160,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "-pthread",
+				"fragment" : "-pthread -g",
 				"role" : "flags"
 			},
 			{

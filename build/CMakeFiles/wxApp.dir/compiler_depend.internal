@@ -2714,6 +2714,7 @@ CMakeFiles/wxApp.dir/src/Trek.cpp.o
  /usr/include/cppconn/datatype.h
  /usr/include/cppconn/resultset.h
  /usr/include/cppconn/exception.h
+ /home/major/Documents/AgenceVoyageCpp/src/dotenv.h
 
 CMakeFiles/wxApp.dir/src/db_setup.cpp.o
  /home/major/Documents/AgenceVoyageCpp/src/db_setup.cpp

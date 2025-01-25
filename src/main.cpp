@@ -336,7 +336,7 @@ void MaFrame::InitTreksTab() {
             if (col == 7) { // Colonne Détails
 
                 // Crée une boîte de dialogue pour tester l'affichage
-                wxDialog* detailsDialog = new wxDialog(this, wxID_ANY, "Details du Trek", wxDefaultPosition, wxSize(400, 300));
+                wxDialog* detailsDialog = new wxDialog(this, wxID_ANY, "Details du Trek", wxDefaultPosition, wxSize(600, 500));
                 wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
                 // Récupérer les données de la ligne
@@ -348,6 +348,12 @@ void MaFrame::InitTreksTab() {
                 std::string difficulte = trekGrid->GetCellValue(row, 5).ToStdString();
                 std::string description = trekGrid->GetCellValue(row, 6).ToStdString();
 
+                // Construire la localisation pour l'API météo
+                std::string location = lieu;
+
+                // Récupérer les détails météo
+                std::string weatherDetails = TrekManager::getWeatherDetails(location);
+
                 // Afficher les données dans la modale
                 sizer->Add(new wxStaticText(detailsDialog, wxID_ANY, wxString::Format("ID: %s", trekId)), 0, wxALL, 10);
                 sizer->Add(new wxStaticText(detailsDialog, wxID_ANY, wxString::Format("Nom: %s", nom)), 0, wxALL, 10);
@@ -356,6 +362,11 @@ void MaFrame::InitTreksTab() {
                 sizer->Add(new wxStaticText(detailsDialog, wxID_ANY, wxString::Format("Prix: %s EUR", prix)), 0, wxALL, 10);
                 sizer->Add(new wxStaticText(detailsDialog, wxID_ANY, wxString::Format("Difficulte: %s", difficulte)), 0, wxALL, 10);
                 sizer->Add(new wxStaticText(detailsDialog, wxID_ANY, wxString::Format("Description: %s", description)), 0, wxALL, 10);
+
+                // Ajouter les données météo
+                sizer->Add(new wxStaticText(detailsDialog, wxID_ANY, "Météo actuelle :"), 0, wxALL, 10);
+                sizer->Add(new wxStaticText(detailsDialog, wxID_ANY, wxString::FromUTF8(weatherDetails)), 0, wxALL, 10);
+
 
 
                 // Ajout de données temporaires pour le test

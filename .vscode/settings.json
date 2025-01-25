@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.sqlbook": "sql",
         "*.ndjson": "jsonl",
         "*.dbclient-js": "javascript",
         "stdexcept": "cpp",
@@ -66,7 +67,14 @@
         "thread": "cpp",
         "cinttypes": "cpp",
         "typeinfo": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "csignal": "cpp",
+        "bitset": "cpp",
+        "complex": "cpp",
+        "set": "cpp",
+        "fstream": "cpp",
+        "typeindex": "cpp",
+        "variant": "cpp"
     },
     "C_Cpp.default.compilerPath": "/usr/bin/g++"
 }

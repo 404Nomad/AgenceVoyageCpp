@@ -19,6 +19,11 @@ set(cpprest_DIR "/usr/lib/x86_64-linux-gnu/cmake/cpprestsdk")
 # Trouver cpprestsdk (Casablanca)
 find_package(cpprestsdk REQUIRED)
 
+include_directories(${CMAKE_SOURCE_DIR}/include)
+
+add_definitions(-DPROJECT_ROOT_DIR="${CMAKE_SOURCE_DIR}")
+
+
 # Définir les fichiers sources
 set(SOURCES 
     src/main.cpp 
