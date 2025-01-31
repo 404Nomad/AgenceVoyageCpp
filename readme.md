@@ -77,7 +77,20 @@ Installez les extensions suivantes pour un support complet du développement en 
 
 ## Configuration
 
-### 1. Lancer le conteneur MySQL
+### 1. Créer .env
+
+Créer les paramètres de connexion dans .env
+
+```
+MYSQL_ROOT_PASSWORD=mycpp
+MYSQL_USER=cppuser
+MYSQL_PASSWORD=mycpp
+MYSQL_DATABASE=agencesqlctn
+OPENWEATHER_API_KEY=YOUR_API_KEY
+```
+Remplacez YOUR_API_KEY par votre clé API OpenWeather.
+
+### 2. Lancer le conteneur MySQL
 
 Utilisez Docker Compose pour démarrer la base de données MySQL :
 
@@ -91,7 +104,7 @@ Vérifiez que le conteneur est opérationnel avec :
 docker ps
 ```
 
-### 2. Configurer la connexion MySQL dans l'application
+### 3. Configurer la connexion MySQL dans l'application
 
 Modifiez les paramètres de connexion à la base de données dans votre application, si nécessaire :
 - Hôte : `localhost`
@@ -169,6 +182,18 @@ Les contributions sont les bienvenues ! Veuillez suivre les étapes suivantes :
 5. Créez une Pull Request.
 
 ---
+
+## Images 
+
+1. **Client** :
+   - ![screenshot](Documents/PResentation/Clients.png)
+
+2. **Trek** :
+   - ![screenshot](Documents/PResentation/Trek.png)
+
+3. **Detail Trek et Meteo** :
+   - ![screenshot](Documents/PResentation/DetailEtMeteo.png)
+
 
 ## Licence
 
